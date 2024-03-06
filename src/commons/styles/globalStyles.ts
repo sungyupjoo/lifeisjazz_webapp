@@ -154,18 +154,39 @@ export const globalStyles = css`
     src: url("../fonts/Pretendard-SemiBold.otf");
   }
 
+  @font-face {
+    font-family: "regular";
+    src: url("../fonts/Pretendard-Regular.otf");
+  }
   h1 {
     font-family: bold;
     font-size: 6.4rem;
+    color: #313131;
+  }
+
+  h2 {
+    font-family: bold;
+    font-size: 3.2rem;
+    color: #313131;
   }
 
   h3 {
     font-family: semibold;
     font-size: 1.6rem;
+    color: #313131;
+  }
+
+  h4 {
+    font-family: regular;
+    font-size: 1.2rem;
+    color: #313131;
   }
 
   p {
-    font-family: medium;
+    font-family: regular;
     font-size: 1rem;
+    color: rgba(0, 0, 0, 0.74);
+    line-height: 1.6rem;
+    word-break: keep-all;
   }
 `;

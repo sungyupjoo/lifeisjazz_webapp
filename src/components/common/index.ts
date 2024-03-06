@@ -1,4 +1,5 @@
 import { Button } from "./Button";
 import { Container } from "./Container";
+import { Title } from "./Title";
 
-export { Button, Container };
+export { Button, Container, Title };

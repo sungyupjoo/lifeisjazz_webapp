@@ -30,7 +30,10 @@ const Navigation: React.FC<NavigationProps> = ({
   };
   return (
     <NavBar>
-      <LogoContainer>
+      <LogoContainer
+        className={activeSection === "home" ? "active" : ""}
+        onClick={() => scrollToRef(homeRef)}
+      >
         <Logo alt="logo" src={logo_white} />
       </LogoContainer>
       <NavItemsContainer>
@@ -85,16 +88,19 @@ const NavBar = styled.section`
   align-items: space-between;
 `;
 
-const LogoContainer = styled.div`
+const LogoContainer = styled.a`
   display: flex;
   flex: 1;
   justify-content: center;
   align-items: flex-end;
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 const Logo = styled.img`
-  width: 124px;
-  height: 124px;
+  width: 156px;
+  height: 156px;
 `;
 
 const NavItemsContainer = styled.section`
@@ -118,6 +124,7 @@ const Anchor = styled.a`
   }
   &:hover {
     color: ${colors.sub};
+    cursor: pointer;
   }
   &:visited {
   }

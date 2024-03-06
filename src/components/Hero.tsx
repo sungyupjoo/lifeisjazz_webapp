@@ -8,8 +8,14 @@ const Hero = () => {
     <Container id="hero">
       <Banner>
         <TitleWrapper>
-          <Title>life is JAZZ</Title>
-          <SubTitle>재즈를 감상하고 연주하고 즐기는 모임입니다</SubTitle>
+          <Title>
+            Life is <SubColorSpan>JAZZ</SubColorSpan>
+          </Title>
+          <SubTitle>
+            연주자, 리스너 구분 없이 모두가
+            <br /> <SubColorSpan>재즈</SubColorSpan>를 감상하고 연주하고 즐기는
+            모임
+          </SubTitle>
           <ButtonWrapper>
             <Button
               text={"소모임 링크"}
@@ -37,8 +43,8 @@ const Banner = styled.div`
   width: 100%;
   background-image: linear-gradient(
       180deg,
-      rgba(0, 0, 0, 0.5),
-      rgba(0, 0, 0, 0.5)
+      rgba(0, 0, 0, 0.65),
+      rgba(0, 0, 0, 0.65)
     ),
     url(${grand_fest});
   background-position: 0% 0%, 0% 0%;
@@ -62,10 +68,15 @@ const Title = styled.h1`
 
 const SubTitle = styled.p`
   color: white;
-  margin-bottom: 1.3rem;
+  line-height: 2rem;
+`;
+
+const SubColorSpan = styled.span`
+  color: ${colors.sub};
 `;
 
 const ButtonWrapper = styled.div`
+  margin-top: 3rem;
   position: relative;
   text-align: center;
 `;
