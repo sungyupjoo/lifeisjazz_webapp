@@ -1,7 +1,6 @@
-import React from "react";
+import styled from "@emotion/styled";
+import { Container } from "./common";
 
-const About = () => {
-  return <div>About</div>;
-};
+const About = () => <Container>About</Container>;
 
 export default About;

@@ -1,7 +1,7 @@
-import React from "react";
+import { Container } from "./common";
 
 const Calendar = () => {
-  return <div>Calendar</div>;
+  return <Container>Calendar</Container>;
 };
 
 export default Calendar;

@@ -1,21 +1,69 @@
 import styled from "@emotion/styled";
 import { logo_white } from "../assets";
 import colors from "../commons/styles/theme";
+import { RefObject, SetStateAction, useState } from "react";
 
-const Navigation = () => {
+interface NavigationProps {
+  homeRef: RefObject<HTMLDivElement>;
+  aboutRef: RefObject<HTMLDivElement>;
+  galleryRef: RefObject<HTMLDivElement>;
+  calendarRef: RefObject<HTMLDivElement>;
+  contactRef: RefObject<HTMLDivElement>;
+  activeSection: string;
+}
+
+const Navigation: React.FC<NavigationProps> = ({
+  homeRef,
+  aboutRef,
+  galleryRef,
+  calendarRef,
+  contactRef,
+  activeSection,
+}) => {
+  const scrollToRef = (ref: RefObject<HTMLDivElement>) => {
+    if (ref.current) {
+      window.scrollTo({
+        top: ref.current?.offsetTop,
+        behavior: "smooth",
+      });
+    }
+  };
   return (
     <NavBar>
       <LogoContainer>
         <Logo alt="logo" src={logo_white} />
       </LogoContainer>
       <NavItemsContainer>
-        <Anchor className="main-color" href="#home">
+        <Anchor
+          className={activeSection === "home" ? "active" : ""}
+          onClick={() => scrollToRef(homeRef)}
+        >
           홈
         </Anchor>
-        <Anchor href="#about">소개</Anchor>
-        <Anchor href="#gallery">사진</Anchor>
-        <Anchor href="#calendar">일정</Anchor>
-        <Anchor href="#contact">연락</Anchor>
+        <Anchor
+          className={activeSection === "about" ? "active" : ""}
+          onClick={() => scrollToRef(aboutRef)}
+        >
+          소개
+        </Anchor>
+        <Anchor
+          className={activeSection === "gallery" ? "active" : ""}
+          onClick={() => scrollToRef(galleryRef)}
+        >
+          사진
+        </Anchor>
+        <Anchor
+          className={activeSection === "calendar" ? "active" : ""}
+          onClick={() => scrollToRef(calendarRef)}
+        >
+          일정
+        </Anchor>
+        <Anchor
+          className={activeSection === "contact" ? "active" : ""}
+          onClick={() => scrollToRef(contactRef)}
+        >
+          연락
+        </Anchor>
       </NavItemsContainer>
     </NavBar>
   );
@@ -62,6 +110,9 @@ const Anchor = styled.a`
   font-family: semibold;
   color: white;
   text-decoration: none;
+  &.active {
+    color: ${colors.sub};
+  }
   &:active {
     color: ${colors.sub};
   }

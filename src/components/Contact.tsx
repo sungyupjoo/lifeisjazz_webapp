@@ -1,7 +1,7 @@
-import React from "react";
+import { Container } from "./common";
 
 const Contact = () => {
-  return <div>Contact</div>;
+  return <Container>Contact</Container>;
 };
 
 export default Contact;

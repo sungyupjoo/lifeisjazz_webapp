@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import { grand_fest, logo_kakao, logo_somoim } from "../assets";
-import Button from "./Button";
+import { Container, Button } from "./common";
 import colors from "../commons/styles/theme";
 
 const Hero = () => {
@@ -31,14 +31,6 @@ const Hero = () => {
 };
 
 export default Hero;
-
-const Container = styled.section`
-  position: relative;
-  left: 329px;
-  width: calc(100% - 329px);
-  display: flex;
-  flex: 1;
-`;
 
 const Banner = styled.div`
   height: 100vh;

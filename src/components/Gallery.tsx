@@ -1,7 +1,7 @@
-import React from "react";
+import { Container } from "./common";
 
 const Gallery = () => {
-  return <div>Gallery</div>;
+  return <Container>Gallery</Container>;
 };
 
 export default Gallery;

@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import colors from "../commons/styles/theme";
+import colors from "../../commons/styles/theme";
 
 interface ButtonProps {
   text: string;
@@ -8,7 +8,7 @@ interface ButtonProps {
   href: string;
 }
 
-const Button: React.FC<ButtonProps> = ({
+export const Button: React.FC<ButtonProps> = ({
   text,
   logoUrl,
   backgroundColor,
@@ -23,8 +23,6 @@ const Button: React.FC<ButtonProps> = ({
     </>
   );
 };
-
-export default Button;
 
 const ButtonContainer = styled.a<{ backgroundColor: string }>`
   background-color: ${(props) => props.backgroundColor};
