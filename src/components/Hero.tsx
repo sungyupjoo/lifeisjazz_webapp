@@ -1,7 +1,8 @@
 import styled from "@emotion/styled";
 import { grand_fest, logo_kakao, logo_somoim } from "../assets";
-import { Container, Button } from "./common";
+import { Container, Button, fadeIn, bounce } from "./common";
 import colors from "../commons/styles/theme";
+import { keyframes } from "@emotion/react";
 
 const Hero = () => {
   return (
@@ -39,6 +40,7 @@ const Hero = () => {
 export default Hero;
 
 const Banner = styled.div`
+  animation: ${fadeIn} 1s ease-in-out;
   height: 100vh;
   width: 100%;
   background-image: linear-gradient(
@@ -59,6 +61,7 @@ const TitleWrapper = styled.div`
   align-items: center;
   justify-content: center;
   text-align: center;
+  animation: ${bounce} 1s ease;
 `;
 
 const Title = styled.h1`

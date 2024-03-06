@@ -7,7 +7,7 @@ interface NavigationProps {
   homeRef: RefObject<HTMLDivElement>;
   aboutRef: RefObject<HTMLDivElement>;
   galleryRef: RefObject<HTMLDivElement>;
-  calendarRef: RefObject<HTMLDivElement>;
+  scheduleRef: RefObject<HTMLDivElement>;
   contactRef: RefObject<HTMLDivElement>;
   activeSection: string;
 }
@@ -16,7 +16,7 @@ const Navigation: React.FC<NavigationProps> = ({
   homeRef,
   aboutRef,
   galleryRef,
-  calendarRef,
+  scheduleRef,
   contactRef,
   activeSection,
 }) => {
@@ -56,8 +56,8 @@ const Navigation: React.FC<NavigationProps> = ({
           사진
         </Anchor>
         <Anchor
-          className={activeSection === "calendar" ? "active" : ""}
-          onClick={() => scrollToRef(calendarRef)}
+          className={activeSection === "schedule" ? "active" : ""}
+          onClick={() => scrollToRef(scheduleRef)}
         >
           일정
         </Anchor>
