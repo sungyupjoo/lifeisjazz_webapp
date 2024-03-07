@@ -7,6 +7,7 @@ import {
   Gallery,
   Hero,
   Navigation,
+  Manager,
 } from "./components";
 import { globalStyles } from "./commons/styles/globalStyles";
 import { useEffect, useRef, useState } from "react";
@@ -14,6 +15,7 @@ import { useEffect, useRef, useState } from "react";
 function App() {
   const homeRef = useRef<HTMLDivElement | null>(null);
   const aboutRef = useRef<HTMLDivElement | null>(null);
+  const managerRef = useRef<HTMLDivElement | null>(null);
   const galleryRef = useRef<HTMLDivElement | null>(null);
   const scheduleRef = useRef<HTMLDivElement | null>(null);
   const contactRef = useRef<HTMLDivElement | null>(null);
@@ -33,6 +35,7 @@ function App() {
     const sections = [
       homeRef.current,
       aboutRef.current,
+      managerRef.current,
       galleryRef.current,
       scheduleRef.current,
       contactRef.current,
@@ -46,7 +49,7 @@ function App() {
         if (section) observer.unobserve(section);
       });
     };
-  }, [homeRef, aboutRef, galleryRef, scheduleRef, contactRef]);
+  }, [homeRef, aboutRef, managerRef, galleryRef, scheduleRef, contactRef]);
 
   return (
     <Container>
@@ -54,6 +57,7 @@ function App() {
       <Navigation
         homeRef={homeRef}
         aboutRef={aboutRef}
+        managerRef={managerRef}
         galleryRef={galleryRef}
         scheduleRef={scheduleRef}
         contactRef={contactRef}
@@ -64,6 +68,9 @@ function App() {
       </div>
       <div id="about" ref={aboutRef}>
         <About />
+      </div>
+      <div id="manager" ref={managerRef}>
+        <Manager />
       </div>
       <div id="gallery" ref={galleryRef}>
         <Gallery />

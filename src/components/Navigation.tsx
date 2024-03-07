@@ -1,11 +1,12 @@
 import styled from "@emotion/styled";
 import { logo_white } from "../assets";
 import colors from "../commons/styles/theme";
-import { RefObject, SetStateAction, useState } from "react";
+import { RefObject } from "react";
 
 interface NavigationProps {
   homeRef: RefObject<HTMLDivElement>;
   aboutRef: RefObject<HTMLDivElement>;
+  managerRef: RefObject<HTMLDivElement>;
   galleryRef: RefObject<HTMLDivElement>;
   scheduleRef: RefObject<HTMLDivElement>;
   contactRef: RefObject<HTMLDivElement>;
@@ -15,6 +16,7 @@ interface NavigationProps {
 const Navigation: React.FC<NavigationProps> = ({
   homeRef,
   aboutRef,
+  managerRef,
   galleryRef,
   scheduleRef,
   contactRef,
@@ -48,6 +50,12 @@ const Navigation: React.FC<NavigationProps> = ({
           onClick={() => scrollToRef(aboutRef)}
         >
           소개
+        </Anchor>
+        <Anchor
+          className={activeSection === "manager" ? "active" : ""}
+          onClick={() => scrollToRef(managerRef)}
+        >
+          운영진
         </Anchor>
         <Anchor
           className={activeSection === "gallery" ? "active" : ""}

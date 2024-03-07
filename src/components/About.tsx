@@ -12,7 +12,7 @@ const About = () => (
       {about.map((about) => (
         <ContentsWrapper key={about.id} index={about.id}>
           <Image src={about.url} />
-          <h3 style={{ marginBottom: "2rem" }}>{about.title}</h3>
+          <h3 style={{ marginBottom: "1.6rem" }}>{about.title}</h3>
           <p>{about.content}</p>
         </ContentsWrapper>
       ))}

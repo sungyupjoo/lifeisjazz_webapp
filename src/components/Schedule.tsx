@@ -18,7 +18,7 @@ const Schedule = () => {
   };
 
   return (
-    <Container innerPadding>
+    <Container innerPadding backgroundGray>
       <Title titleText="일정" subTitle="모임 일정 및 연습실 예약" />
       <CalendarWrapper>
         <StyledCalendar
