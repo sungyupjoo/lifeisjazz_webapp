@@ -2,6 +2,7 @@ import styled from "@emotion/styled";
 import { logo_white } from "../assets";
 import colors from "../commons/styles/theme";
 import { RefObject } from "react";
+import Login from "./Login";
 
 interface NavigationProps {
   homeRef: RefObject<HTMLDivElement>;
@@ -76,6 +77,9 @@ const Navigation: React.FC<NavigationProps> = ({
           연락
         </Anchor>
       </NavItemsContainer>
+      <LoginWrapper>
+        <Login />
+      </LoginWrapper>
     </NavBar>
   );
 };
@@ -113,8 +117,8 @@ const Logo = styled.img`
 
 const NavItemsContainer = styled.section`
   display: flex;
-  padding: 60px 0 100px;
-  flex: 1;
+  padding: 60px 0px;
+  flex: 1.3;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
@@ -122,6 +126,7 @@ const NavItemsContainer = styled.section`
 
 const Anchor = styled.a`
   font-family: semibold;
+  font-size: 1rem;
   color: white;
   text-decoration: none;
   &.active {
@@ -139,4 +144,10 @@ const Anchor = styled.a`
   &:focus {
     color: ${colors.sub};
   }
+`;
+
+const LoginWrapper = styled.div`
+  text-align: center;
+  width: 100%;
+  margin-bottom: 1.4rem;
 `;

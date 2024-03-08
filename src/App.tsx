@@ -11,6 +11,8 @@ import {
 } from "./components";
 import { globalStyles } from "./commons/styles/globalStyles";
 import { useEffect, useRef, useState } from "react";
+import { ModalProvider } from "styled-react-modal";
+import { AuthProvider } from "./context/auth";
 
 function App() {
   const homeRef = useRef<HTMLDivElement | null>(null);
@@ -52,36 +54,40 @@ function App() {
   }, [homeRef, aboutRef, managerRef, galleryRef, scheduleRef, contactRef]);
 
   return (
-    <Container>
-      <Global styles={globalStyles} />
-      <Navigation
-        homeRef={homeRef}
-        aboutRef={aboutRef}
-        managerRef={managerRef}
-        galleryRef={galleryRef}
-        scheduleRef={scheduleRef}
-        contactRef={contactRef}
-        activeSection={activeSection}
-      />
-      <div id="home" ref={homeRef}>
-        <Hero />
-      </div>
-      <div id="about" ref={aboutRef}>
-        <About />
-      </div>
-      <div id="manager" ref={managerRef}>
-        <Manager />
-      </div>
-      <div id="gallery" ref={galleryRef}>
-        <Gallery />
-      </div>
-      <div id="schedule" ref={scheduleRef}>
-        <Schedule />
-      </div>
-      <div id="contact" ref={contactRef}>
-        <Contact />
-      </div>
-    </Container>
+    <AuthProvider>
+      <Container>
+        <Global styles={globalStyles} />
+        <ModalProvider>
+          <Navigation
+            homeRef={homeRef}
+            aboutRef={aboutRef}
+            managerRef={managerRef}
+            galleryRef={galleryRef}
+            scheduleRef={scheduleRef}
+            contactRef={contactRef}
+            activeSection={activeSection}
+          />
+          <div id="home" ref={homeRef}>
+            <Hero />
+          </div>
+          <div id="about" ref={aboutRef}>
+            <About />
+          </div>
+          <div id="manager" ref={managerRef}>
+            <Manager />
+          </div>
+          <div id="gallery" ref={galleryRef}>
+            <Gallery />
+          </div>
+          <div id="schedule" ref={scheduleRef}>
+            <Schedule />
+          </div>
+          <div id="contact" ref={contactRef}>
+            <Contact />
+          </div>
+        </ModalProvider>
+      </Container>
+    </AuthProvider>
   );
 }
 

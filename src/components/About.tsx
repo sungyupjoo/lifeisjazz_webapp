@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
 import { Container, Title } from "./common";
 import { about } from "./contents/about";
+import colors from "../commons/styles/theme";
 
 const About = () => (
   <Container innerPadding>
@@ -12,8 +13,12 @@ const About = () => (
       {about.map((about) => (
         <ContentsWrapper key={about.id} index={about.id}>
           <Image src={about.url} />
-          <h3 style={{ marginBottom: "1.6rem" }}>{about.title}</h3>
-          <p>{about.content}</p>
+          <InnerContainer>
+            <h3 style={{ marginBottom: "1.6rem", textAlign: "center" }}>
+              {about.title}
+            </h3>
+            <p>{about.content}</p>
+          </InnerContainer>
         </ContentsWrapper>
       ))}
     </ContentsContainer>
@@ -33,16 +38,25 @@ const ContentsWrapper = styled.div<{ index: number }>`
   margin-right: ${(props) => (props.index !== about.length ? "2rem" : "")};
   display: flex;
   flex-direction: column;
-  padding: 0 6px;
-
+  border-radius: 8px;
   p {
     white-space: pre-wrap;
   }
+  &hover: {
+    background-color: ${colors.borderGray};
+  }
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  flex-grow: 0;
+`;
+
+const InnerContainer = styled.div`
+  padding: 0 6px;
 `;
 
 const Image = styled.img`
-  width: 10rem;
+  width: 100%;
   height: 10rem;
   margin-bottom: 1.6rem;
   border-radius: 8px;
+  flex-grow: 0;
 `;

@@ -3,9 +3,10 @@ import colors from "../../commons/styles/theme";
 
 interface ButtonProps {
   text: string;
-  logoUrl: string;
+  logoUrl?: string;
   backgroundColor: string;
-  href: string;
+  href?: string;
+  onClick?: () => void;
 }
 
 export const Button: React.FC<ButtonProps> = ({
@@ -13,11 +14,19 @@ export const Button: React.FC<ButtonProps> = ({
   logoUrl,
   backgroundColor,
   href,
+  onClick,
 }) => {
   return (
     <>
-      <ButtonContainer backgroundColor={backgroundColor} href={href}>
-        <LogoImage src={logoUrl} />
+      <ButtonContainer
+        backgroundColor={backgroundColor}
+        href={href}
+        onClick={(e) => {
+          e.preventDefault();
+          if (onClick) onClick();
+        }}
+      >
+        {logoUrl && <LogoImage src={logoUrl} />}
         {text}
       </ButtonContainer>
     </>
@@ -29,8 +38,8 @@ const ButtonContainer = styled.a<{ backgroundColor: string }>`
   margin-right: 5px;
   margin-left: 5px;
   display: inline-block;
-  padding: 11px 20px;
-  border: 2px solid ${colors.main};
+  padding: 8px 20px;
+  border: 2px solid ${(props) => props.backgroundColor};
   border-radius: 4px;
   text-decoration: none;
   font-family: regular;

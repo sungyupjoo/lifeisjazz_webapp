@@ -10,6 +10,17 @@ const fadeIn = keyframes`
 		transform: translate3d(0, 0, 0);
 }`;
 
+const fadeOut = keyframes`
+from {
+	opacity: 1;
+	transform: translate3d(0, 0, 0);
+}
+to {
+	opacity: 0;
+	transform: translate3d(0, 0, 0);
+}
+`;
+
 const bounce = keyframes`
 0% {
   transform: translateY(-40px);
@@ -21,4 +32,4 @@ const bounce = keyframes`
 }
 `;
 
-export { fadeIn, bounce };
+export { fadeIn, fadeOut, bounce };

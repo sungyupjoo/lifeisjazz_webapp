@@ -4,7 +4,7 @@ import { Container, Title } from "./common";
 const Gallery = () => (
   <Container innerPadding>
     <Title titleText="사진첩" subTitle="라이재의 활동 내역" />
-    <Photos></Photos>
+    <Photos>{}</Photos>
   </Container>
 );
 
