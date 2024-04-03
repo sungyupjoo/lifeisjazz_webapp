@@ -1,8 +1,7 @@
 import styled from "@emotion/styled";
-import { grand_fest, logo_kakao, logo_somoim } from "../assets";
+import { grand_fest, logo_kakao, logo_somoim } from "../../public/assets";
 import { Container, Button, fadeIn, bounce } from "./common";
 import colors from "../commons/styles/theme";
-import { keyframes } from "@emotion/react";
 
 const Hero = () => {
   return (

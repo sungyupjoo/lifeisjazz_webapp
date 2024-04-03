@@ -1,68 +1,159 @@
 import styled from "@emotion/styled";
-import { Container, FlexWrapper, Title } from "./common";
-import Calendar from "react-calendar";
+import {
+  Button,
+  Container,
+  FlexWrapper,
+  InputBox,
+  StyledModal,
+  Title,
+} from "./common";
 import "react-calendar/dist/Calendar.css";
 import { useState } from "react";
 import colors from "../commons/styles/theme";
-import moment from "moment";
-
-// calendar 쓰기 위해 type 설정
-type ValuePiece = Date | null;
-type Value = ValuePiece | [ValuePiece, ValuePiece];
+import CustomCalendar, { Value, ValuePiece } from "./CustomCalendar";
+import { exampleMembers } from "./contents/exampleMembers";
+import {
+  IconArrowRight,
+  IconCalendar,
+  IconMoney,
+  IconPen,
+  IconPeople,
+  IconPlace,
+  IconTime,
+} from "./common/Icons";
+import { formatDate } from "../utils/formatDate";
 
 const Schedule = () => {
+  // 달력의 날짜
   const today = new Date();
   const [date, setDate] = useState<Value>(today);
+  const [formattedDate, setFormattedDate] = useState<string>(formatDate(today));
   const handleDateChange = (newDate: Value) => {
     setDate(newDate);
-    console.log(newDate);
+    setFormattedDate(formatDate(newDate));
   };
-  const [activeStartDate, setActiveStartDate] = useState<Date | null>(
-    new Date()
-  );
+  // 일정 추가
+  const [isAddEventModalVisible, setIsAddEventModalVisible] = useState(false);
+  const addEventHandler = () => {
+    setIsAddEventModalVisible(true);
+  };
+  const registerHandler = () => {};
 
   return (
     <Container innerPadding backgroundGray>
       <Title titleText="일정" subTitle="모임 일정 및 잼데이 신청" />
       <FlexWrapper>
-        <CalendarWrapper>
-          <StyledCalendar
-            value={date}
-            onChange={handleDateChange}
-            locale={"ko"}
-            formatDay={(locale, date) => moment(date).format("D")}
-            formatYear={(locale, date) => moment(date).format("YYYY")}
-            formatMonthYear={(locale, date) =>
-              moment(date).format("YYYY년 M월")
-            }
-            next2Label={null}
-            prev2Label={null}
-            minDetail="year"
-            calendarType="gregory"
-            // 오늘 날짜로 돌아오는 기능을 위해 필요한 옵션 설정
-            activeStartDate={
-              activeStartDate === null ? undefined : activeStartDate
-            }
-            onActiveStartDateChange={({ activeStartDate }) =>
-              setActiveStartDate(activeStartDate)
-            }
-            // 일정 표시용
-            // tileContent={({ date, view }) => {
-            //   let html = [];
-            //   return <>{html}</>;
-            // }}
-          />
-        </CalendarWrapper>
+        <CustomCalendar date={date} onDateChange={handleDateChange} />
         <Wrapper>
-          <ItemContainer>
-            <ItemTitle>다음 일정</ItemTitle>
-            <Date>
-              3/10(일) 오후 3:00<RedText>D-2</RedText>
-            </Date>
-          </ItemContainer>
-          <ItemContainer></ItemContainer>
+          <ItemBigContainer>
+            <ItemBigWrapper>
+              <ItemTitle>다음 일정</ItemTitle>
+              <ItemContainer>
+                <TitleContainer>
+                  <ItemSubTitle>
+                    <RedText style={{ marginRight: "1rem" }}>D-2</RedText>{" "}
+                    3/10(일) 오후 3:00
+                  </ItemSubTitle>
+                  <Button
+                    backgroundColor={colors.sub}
+                    text="참석"
+                    href=""
+                    onClick={() => {}}
+                  />
+                </TitleContainer>
+                <ItemTitle>린가드 보러 가요!!</ItemTitle>
+                <ItemContentContainer>
+                  <Photo
+                    src={
+                      "https://image.fmkorea.com/files/attach/new3/20240202/3674493/2188111904/6679407385/6b693f47f5d5454a9f8c1a7bc82a84dd.png"
+                    }
+                  />
+                  <ItemDetailsContainer>
+                    <ItemContentWrapper>
+                      <ItemContent>위치</ItemContent>
+                      <p>서울역</p>
+                    </ItemContentWrapper>
+                    <ItemContentWrapper>
+                      <ItemContent>비용</ItemContent>
+                      <p>10,000원</p>
+                    </ItemContentWrapper>
+                    <ParticipantWrapper>
+                      <ItemContentWrapper>
+                        <ItemContent>참석</ItemContent>
+                        <p>
+                          <RedText>{exampleMembers.length}</RedText> / 10
+                        </p>
+                      </ItemContentWrapper>
+                      <ItemContentWrapper>
+                        {exampleMembers.map((member) => (
+                          <MemberImage
+                            key={member.id}
+                            alt="Member"
+                            src={member.profileImageUrl}
+                          />
+                        ))}
+                      </ItemContentWrapper>
+                    </ParticipantWrapper>
+                  </ItemDetailsContainer>
+                </ItemContentContainer>
+              </ItemContainer>
+            </ItemBigWrapper>
+            <AddButton onClick={addEventHandler}>+</AddButton>
+          </ItemBigContainer>
+          <ItemBigWrapper>
+            <ItemTitle>{formattedDate} 잼</ItemTitle>
+            <ItemContainer>
+              <TitleContainer>
+                <Button
+                  backgroundColor={colors.sub}
+                  text="참석"
+                  href=""
+                  onClick={() => {}}
+                />
+              </TitleContainer>
+              <ItemContentContainer>
+                <ItemSubTitle>
+                  <ItemContent>참석 인원</ItemContent>
+                </ItemSubTitle>
+              </ItemContentContainer>
+            </ItemContainer>
+          </ItemBigWrapper>
         </Wrapper>
       </FlexWrapper>
+      {isAddEventModalVisible && (
+        <StyledModal
+          isModalVisible={isAddEventModalVisible}
+          closeModal={() => setIsAddEventModalVisible(false)}
+          height="34rem"
+          width="22rem"
+        >
+          <TitleContainer>
+            <NewEventTitle>새 일정 등록</NewEventTitle>
+            <Button
+              text="등록"
+              backgroundColor={colors.sub}
+              onClick={registerHandler}
+              href=""
+            />
+          </TitleContainer>
+          <Margin20Container />
+          {/* <PhotoContainer>사진 추가</PhotoContainer> */}
+
+          <InputBox placeHolder="일정 제목" icon={IconPen} />
+          <InputBox placeHolder="날짜" icon={IconCalendar} onClick={() => {}} />
+          <TimeContainer>
+            <InputBox placeHolder="시간" icon={IconTime} />
+            <IconArrowRight size={16} />
+            <InputBox placeHolder="시간" icon={IconTime} />
+          </TimeContainer>
+          <InputBox placeHolder="장소" icon={IconPlace} />
+          <DetailContainer>
+            <InputBox placeHolder="정원" icon={IconPeople} />
+            <InputBox placeHolder="비용" icon={IconMoney} />
+          </DetailContainer>
+          <InputBox placeHolder="상세 내용" height={"8rem"} />
+        </StyledModal>
+      )}
     </Container>
   );
 };
@@ -75,173 +166,133 @@ const Wrapper = styled.div`
   gap: 2rem;
 `;
 
+const ItemBigContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+`;
+
+const ItemBigWrapper = styled.div`
+  height: 100%;
+`;
+
 const ItemContainer = styled.div`
   flex: 1;
-  width: 100%;
-  background-color: white;
+  width: 400px;
   border-radius: 8px;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
-  background-color: white;
-  padding: 8px 11px;
+  padding: 20px;
+  &:hover {
+    background-color: ${colors.borderGray};
+  }
+  height: 100%;
+`;
+
+const AddButton = styled.div`
+  background-color: ${colors.sub};
+  color: white;
+  font-size: 2rem;
+  width: 2.4rem;
+  height: 2.4rem;
+  border-radius: 2.4rem;
+  margin-left: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  &:hover {
+    background-color: ${colors.subShade};
+  }
+`;
+
+const TitleContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
 `;
 
 const RedText = styled.span`
+  font-family: bold;
   color: ${colors.sub};
-  font-size: 1rem;
 `;
 
-const ItemTitle = styled.h4`
+const ItemTitle = styled.h3`
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+`;
+
+const ItemContentContainer = styled.div`
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: row;
+`;
+
+const ItemSubTitle = styled.h3`
   font-size: 1.2rem;
 `;
 
-const CalendarWrapper = styled.div`
-  margin-top: 2.4rem; 
-  display: flex;
-  justify-content: center;
-  position: relative;
-  .react-calendar {
-    border-radius: 8px;
-    border: none;
-    padding: 1% 2%;
-    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
-    background-color: white;
-  }
+const ItemContent = styled.p`
+  color: ${colors.gray};
+`;
 
-  /* 네비게이션 가운데 정렬 */
-  .react-calendar__navigation {
-    justify-content: center;
-  }
-
-  /* 네비게이션 폰트 설정 */
-  .react-calendar__navigation button {
-    font-weight: 800;
-    font-size: 1rem;
-  }
-
-  /* 네비게이션 버튼 컬러 */
-  .react-calendar__navigation button:focus {
-    background-color: white;
-  }
-
-  /* 네비게이션 비활성화 됐을때 스타일 */
-  .react-calendar__navigation button:disabled {
-    background-color: white;
-    color: ${colors.main};
-  }
-
-  /* 년/월 상단 네비게이션 칸 크기 줄이기 */
-  .react-calendar__navigation__label {
-    flex-grow: 0.2 !important;
-  }
-
-  /* 요일 밑줄 제거 */
-  .react-calendar__month-view__weekdays abbr {
-    text-decoration: none;
-    font-weight: 800;
-  }
-
-
-  /* 일요일에 빨간 폰트 */
-  .react-calendar__month-view__weekdays__weekday--weekend abbr[title="일요일"] {
-    color: ${colors.sub}};
-  }
-
- /* 날짜 */
- .react-calendar__tile {
-  text-align: center;
-  height: 50px;
+const ItemDetailsContainer = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  }
-  
-  /*hover, focus, 선택됐을 시 */
-  .react-calendar__tile:enabled:hover,
-  .react-calendar__tile:enabled:focus,
-  .react-calendar__tile--active {
-   background: ${colors.main};
-   border-radius: 14px;
-  }
-
-  /* 오늘 날짜 컬러 */
-  .react-calendar__tile--now {
-    background: ${colors.gray};
-    border-radius: 0.3rem;
-    abbr {
-      color: white;
-    }
-  }
-  /* 네비게이션 월 스타일 적용 */
-  .react-calendar__year-view__months__month {
-    border-radius: 0.8rem;
-    background-color: ${colors.gray};
-    padding: 0;
-  }
-
-  /* 네비게이션 현재 월 스타일 적용 */
-  .react-calendar__tile--hasActive {
-    background-color: ${colors.sub};
-    abbr {
-      color: white;
-    }
-  }
-
-  /* 일 날짜 간격 */
-  .react-calendar__tile {
-    padding: 5px 0px 18px;
-    position: relative;
-  }
-
-  /* 네비게이션 월 스타일 적용 */
-  .react-calendar__year-view__months__month {
-    flex: 0 0 calc(33.3333% - 10px) !important;
-    margin-inline-start: 5px !important;
-    margin-inline-end: 5px !important;
-    margin-block-end: 10px;
-    padding: 20px 6.6667px;
-    font-size: 0.9rem;
-    font-weight: 600;
-    color: ${colors.gray};
-  }
-
-  /* 선택한 날짜 스타일 적용 */
-  .react-calendar__tile:enabled:hover,
-  .react-calendar__tile:enabled:focus,
-  .react-calendar__tile--active {
-    background-color: ${colors.main};
-    border-radius: 0.3rem;
-    color: white;
-  }
+  gap: 0.4rem;
 `;
 
-const StyledCalendar = styled(Calendar)``;
-
-export const StyledDate = styled.div`
-  position: absolute;
-  right: 7%;
-  top: 6%;
-  background-color: ${colors.main};
-  color: white;
-  width: 18%;
-  min-width: fit-content;
-  height: 1.5rem;
-  text-align: center;
-  margin: 0 auto;
-  line-height: 1.6rem;
-  border-radius: 15px;
-  font-size: 0.8rem;
-  font-weight: 800;
+const ItemContentWrapper = styled.div`
+  display: flex;
+  gap: 0.6rem;
 `;
 
-/* 일정 있는 날짜에 점 표시 스타일 */
-const StyledDot = styled.div`
-  background-color: ${colors.sub};
+const ParticipantWrapper = styled.div``;
+
+const Photo = styled.img`
+  width: 128px;
+  height: 128px;
+  border-radius: 8px;
+  margin-right: 0.8rem;
+`;
+
+const NewEventTitle = styled.h2`
+  font-size: 2rem;
+`;
+
+const MemberImage = styled.img`
+  margin-top: 0.5rem;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
-  width: 0.3rem;
-  height: 0.3rem;
-  position: absolute;
-  top: 67%;
-  left: 50%;
-  transform: translateX(-50%);
+  object-fit: cover;
+  margin-right: -24px;
+  border: 3px solid white;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.1);
+  &:last-child {
+    margin-right: 0;
+  }
+`;
+
+const Margin20Container = styled.div`
+  height: 2rem;
+`;
+
+const TimeContainer = styled.div`
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 8px;
+`;
+
+const DetailContainer = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+`;
+
+const PhotoContainer = styled.div`
+  width: 128px;
+  height: 128px;
+  border: 1px solid ${colors.gray};
+  border-radius: 8px;
+  margin-right: 0.8rem;
 `;

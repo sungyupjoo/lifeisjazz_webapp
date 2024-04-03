@@ -3,12 +3,15 @@ import KakaoMap from "./KakaoMap";
 import { Button, Container, Title, FlexWrapper } from "./common";
 import colors from "../commons/styles/theme";
 import { useState } from "react";
-import Footer from "./Footer";
 
 const Contact = () => {
   const [ruleModalVisible, setRuleModalVisible] = useState(false);
+  const [kakaoModalVisible, setKakaoModalVisible] = useState(false);
   const showRuleModal = () => {
     setRuleModalVisible(true);
+  };
+  const showKakaoModal = () => {
+    setKakaoModalVisible(true);
   };
 
   return (
@@ -37,10 +40,21 @@ const Contact = () => {
             <WrapperSpaceBetween>
               <MiniTitle>연락처</MiniTitle>
             </WrapperSpaceBetween>
+            <Content>
+              <SpanGray>대표</SpanGray>조성제 010-2278-4351
+            </Content>
+          </ContactItem>
+          <ContactItem>
             <WrapperSpaceBetween>
-              <Content>• 조성제 : 010-2278-4351</Content>
-              <ContentBank>우리은행 258-21572-902001</ContentBank>
+              <MiniTitle>계좌</MiniTitle>
+              <Button
+                backgroundColor={colors.sub}
+                text="카카오페이"
+                onClick={showKakaoModal}
+                href=""
+              />
             </WrapperSpaceBetween>
+            <Content>우리은행 258-21572-902001</Content>
           </ContactItem>
         </InnerContainer>
       </FlexWrapper>
@@ -65,9 +79,12 @@ const MiniTitle = styled.h3``;
 
 const Content = styled.p``;
 
-const ContentBank = styled(Content)`
-  font-size: 0.8rem;
-  color: ${colors.gray};
+const SpanGray = styled.span`
+  background-color: ${colors.gray};
+  color: white;
+  padding: 2px 6px;
+  border-radius: 3px;
+  margin-right: 4px;
 `;
 
 const InnerContainer = styled.div`

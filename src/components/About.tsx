@@ -14,10 +14,10 @@ const About = () => (
         <ContentsWrapper key={about.id} index={about.id}>
           <Image src={about.url} />
           <InnerContainer>
-            <h3 style={{ marginBottom: "1.6rem", textAlign: "center" }}>
+            <h3 style={{ marginBottom: "1.2rem", textAlign: "center" }}>
               {about.title}
             </h3>
-            <p>{about.content}</p>
+            <p style={{ marginBottom: "0.3rem" }}>{about.content}</p>
           </InnerContainer>
         </ContentsWrapper>
       ))}
@@ -32,10 +32,10 @@ const ContentsContainer = styled.div`
   padding-top: 3rem;
   grid-template-columns: repeat(4, 1fr);
   justify-contents: space-between;
+  gap: 2rem;
 `;
 
 const ContentsWrapper = styled.div<{ index: number }>`
-  margin-right: ${(props) => (props.index !== about.length ? "2rem" : "")};
   display: flex;
   flex-direction: column;
   border-radius: 8px;
@@ -50,13 +50,14 @@ const ContentsWrapper = styled.div<{ index: number }>`
 `;
 
 const InnerContainer = styled.div`
-  padding: 0 6px;
+  padding: 0 16px;
 `;
 
 const Image = styled.img`
   width: 100%;
   height: 10rem;
   margin-bottom: 1.6rem;
-  border-radius: 8px;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
   flex-grow: 0;
 `;

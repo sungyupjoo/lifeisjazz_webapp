@@ -3,7 +3,7 @@ import {
   manager_las,
   manager_js,
   manager_bins,
-} from "../../assets";
+} from "../../../public/assets";
 
 interface ManagerProps {
   id: number;

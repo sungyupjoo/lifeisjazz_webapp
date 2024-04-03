@@ -47,6 +47,16 @@ const ButtonContainer = styled.a<{ backgroundColor: string }>`
   & > * {
     vertical-align: middle;
   }
+  &:hover {
+    background-color: ${(props) =>
+      props.backgroundColor === colors.main
+        ? colors.mainShade
+        : colors.subShade};
+    border-color: ${(props) =>
+      props.backgroundColor === colors.main
+        ? colors.mainShade
+        : colors.subShade};
+  }
 `;
 
 const LogoImage = styled.img`

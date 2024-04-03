@@ -1,7 +1,6 @@
 import styled from "@emotion/styled";
 import colors from "../commons/styles/theme";
-import { Button, fadeIn } from "./common";
-import Modal from "styled-react-modal";
+import { Button, StyledModal, fadeIn } from "./common";
 import { useState } from "react";
 import { useAuth } from "../hooks/useAuth";
 
@@ -14,9 +13,19 @@ const Login = () => {
   const closeModal = () => {
     setIsModalVisible(false);
   };
+  const loginHandler = () => {
+    // const REST_API_KEY = import.meta.env.VITE_REST_API_KEY;
+    closeModal();
+
+    // const link = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`;
+    const AUTHORIZE_CODE = new URLSearchParams(window.location.search).get(
+      "code"
+    );
+    // window.location.href = link;
+    console.log(AUTHORIZE_CODE);
+  };
 
   const { user } = useAuth();
-  console.log(user);
   return (
     <>
       <Button
@@ -27,21 +36,18 @@ const Login = () => {
       />
       {isModalVisible && (
         <StyledModal
-          isOpen={isModalVisible}
-          onBackgroundClick={closeModal}
-          onEscapeKeydown={closeModal}
+          isModalVisible={isModalVisible}
+          closeModal={closeModal}
+          width={"25rem"}
+          height={"20rem"}
         >
           <ModalTitle>로그인</ModalTitle>
-          <SubText>메일주소</SubText>
-          <InputBox />
-          <SubText>비밀번호</SubText>
-          <InputBox />
           <ButtonContainer>
             <Button
               backgroundColor={colors.sub}
-              text="로그인"
+              text="카카오로 로그인"
               href=""
-              onClick={closeModal}
+              onClick={loginHandler}
             />
           </ButtonContainer>
         </StyledModal>
@@ -50,16 +56,6 @@ const Login = () => {
   );
 };
 export default Login;
-
-const StyledModal = Modal.styled`
-  align-items: center;
-  justify-content: center;
-  background-color: white;
-  width: 25rem;
-  height: 20rem;
-  border-radius: 20px;
-  padding: 2rem;
-`;
 
 const ModalTitle = styled.h3`
   text-align: center;

@@ -1,4 +1,9 @@
-import { photo_club, photo_festival, photo_jam, photo_ski } from "../../assets";
+import {
+  photo_club,
+  photo_festival,
+  photo_jam,
+  photo_ski,
+} from "../../../public/assets";
 
 interface AboutProps {
   id: number;

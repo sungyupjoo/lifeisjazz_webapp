@@ -5,6 +5,10 @@ const enum colors {
   gray = "#737373",
   backgroundGray = "#fafafa",
   borderGray = "#e1e1e1",
+  mainShade = "#24323f",
+  mainTint = "#576572",
+  subShade = "#a6333e",
+  subTint = "#d96671",
 }
 
 export default colors;
