@@ -12,7 +12,7 @@ interface NavigationProps {
   scheduleRef: RefObject<HTMLDivElement>;
   contactRef: RefObject<HTMLDivElement>;
   personalInfoRef: RefObject<HTMLDivElement>;
-  activeSection: string;
+  activeSection: string | undefined;
 }
 
 const Navigation: React.FC<NavigationProps> = ({

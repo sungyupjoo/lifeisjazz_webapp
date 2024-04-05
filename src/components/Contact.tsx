@@ -54,7 +54,7 @@ const Contact = () => {
                 href=""
               />
             </WrapperSpaceBetween>
-            <Content>우리은행 258-21572-902001</Content>
+            <Content>우리은행 258-21572-902001 조성제</Content>
           </ContactItem>
         </InnerContainer>
       </FlexWrapper>

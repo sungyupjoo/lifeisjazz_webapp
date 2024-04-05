@@ -23,14 +23,20 @@
     "noFallthroughCasesInSwitch": true,
     "allowJs": true,
     "incremental": true,
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ]
   },
   "include": [
     "src",
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    "additional.d.ts"
+    "additional.d.ts",
+    ".next/types/**/*.ts"
   ],
   "references": [
     {
