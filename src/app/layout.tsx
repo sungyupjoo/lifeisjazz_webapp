@@ -1,14 +1,18 @@
 import Script from "next/script";
+import { ReactNode } from "react";
 
 export const metadata = {
   title: "Life is Jazz",
   description: "",
 };
 
-export default function RootLayout({ children }: any) {
+interface Props {
+  children: ReactNode;
+}
+
+export default function RootLayout({ children }: Props) {
   return (
     <html lang="en">
-      <Script type="module" src="/src/main.tsx"></Script>
       <Script
         type="text/javascript"
         src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d5fdd6e2dcb937e3fca752e4eaddb850&autoload=false"

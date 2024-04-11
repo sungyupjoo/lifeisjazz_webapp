@@ -28,12 +28,7 @@ const Login = () => {
   const { user } = useAuth();
   return (
     <>
-      <Button
-        backgroundColor={colors.sub}
-        text="로그인"
-        href=""
-        onClick={clickHandler}
-      />
+      <Button backgroundColor={colors.sub} text="로그인" href="" />
       {isModalVisible && (
         <StyledModal
           isModalVisible={isModalVisible}
@@ -47,7 +42,6 @@ const Login = () => {
               backgroundColor={colors.sub}
               text="카카오로 로그인"
               href=""
-              onClick={loginHandler}
             />
           </ButtonContainer>
         </StyledModal>

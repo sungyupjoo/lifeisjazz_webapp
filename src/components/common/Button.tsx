@@ -1,11 +1,13 @@
 import styled from "@emotion/styled";
 import colors from "../../commons/styles/theme";
+import Link from "next/link";
 
 interface ButtonProps {
   text: string;
   logoUrl?: string;
   backgroundColor: string;
   href?: string;
+  link?: boolean;
   onClick?: () => void;
 }
 
@@ -14,26 +16,44 @@ export const Button: React.FC<ButtonProps> = ({
   logoUrl,
   backgroundColor,
   href,
+  link = false,
   onClick,
 }) => {
   return (
     <>
-      <ButtonContainer
-        backgroundColor={backgroundColor}
-        href={href}
-        onClick={(e) => {
-          e.preventDefault();
-          if (onClick) onClick();
-        }}
-      >
+      <ButtonContainer backgroundColor={backgroundColor}>
         {logoUrl && <LogoImage src={logoUrl} />}
-        {text}
+        {link ? (
+          <Link
+            href={"/JamPortal"}
+            style={{
+              textDecoration: "none",
+              color: "white",
+              fontFamily: "regular",
+            }}
+          >
+            {text}
+          </Link>
+        ) : (
+          <ButtonAnchor
+            href={href}
+            onClick={(e) => {
+              if (onClick) {
+                e.preventDefault();
+                onClick();
+              }
+              return;
+            }}
+          >
+            {text}
+          </ButtonAnchor>
+        )}
       </ButtonContainer>
     </>
   );
 };
 
-const ButtonContainer = styled.a<{ backgroundColor: string }>`
+const ButtonContainer = styled.div<{ backgroundColor: string }>`
   background-color: ${(props) => props.backgroundColor};
   margin-right: 5px;
   margin-left: 5px;
@@ -41,9 +61,6 @@ const ButtonContainer = styled.a<{ backgroundColor: string }>`
   padding: 8px 20px;
   border: 2px solid ${(props) => props.backgroundColor};
   border-radius: 4px;
-  text-decoration: none;
-  font-family: regular;
-  color: white;
   & > * {
     vertical-align: middle;
   }
@@ -56,6 +73,15 @@ const ButtonContainer = styled.a<{ backgroundColor: string }>`
       props.backgroundColor === colors.main
         ? colors.mainShade
         : colors.subShade};
+  }
+`;
+
+const ButtonAnchor = styled.a`
+  text-decoration: none;
+  font-family: regular;
+  color: white;
+  & > * {
+    vertical-align: middle;
   }
 `;
 

@@ -3,6 +3,7 @@ import { logo_white } from "../../public/assets";
 import colors from "../commons/styles/theme";
 import { RefObject } from "react";
 import Login from "./Login";
+import { Button } from "./common";
 
 interface NavigationProps {
   homeRef: RefObject<HTMLDivElement>;
@@ -11,7 +12,6 @@ interface NavigationProps {
   galleryRef: RefObject<HTMLDivElement>;
   scheduleRef: RefObject<HTMLDivElement>;
   contactRef: RefObject<HTMLDivElement>;
-  personalInfoRef: RefObject<HTMLDivElement>;
   activeSection: string | undefined;
 }
 
@@ -22,7 +22,6 @@ const Navigation: React.FC<NavigationProps> = ({
   galleryRef,
   scheduleRef,
   contactRef,
-  personalInfoRef,
   activeSection,
 }) => {
   const scrollToRef = (ref: RefObject<HTMLDivElement>) => {
@@ -60,12 +59,12 @@ const Navigation: React.FC<NavigationProps> = ({
         >
           운영진
         </Anchor>
-        {/* <Anchor
+        <Anchor
           className={activeSection === "gallery" ? "active" : ""}
           onClick={() => scrollToRef(galleryRef)}
         >
-          사진
-        </Anchor> */}
+          사진첩
+        </Anchor>
         <Anchor
           className={activeSection === "schedule" ? "active" : ""}
           onClick={() => scrollToRef(scheduleRef)}
@@ -78,16 +77,10 @@ const Navigation: React.FC<NavigationProps> = ({
         >
           연락
         </Anchor>
-        <Anchor
-          className={activeSection === "personalInfo" ? "active" : ""}
-          onClick={() => scrollToRef(personalInfoRef)}
-        >
-          설정
-        </Anchor>
       </NavItemsContainer>
-      <LoginWrapper>
-        <Login />
-      </LoginWrapper>
+      <ButtonWrapper>
+        <Button backgroundColor={colors.sub} text="잼데이" link />
+      </ButtonWrapper>
     </NavBar>
   );
 };
@@ -154,7 +147,7 @@ const Anchor = styled.a`
   }
 `;
 
-const LoginWrapper = styled.div`
+const ButtonWrapper = styled.div`
   text-align: center;
   width: 100%;
   margin-bottom: 1.4rem;
