@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 import { logo_white } from "../../public/assets";
 import colors from "../commons/styles/theme";
 import { RefObject } from "react";
-import Login from "./Login";
+import Login from "./Login/Login";
 
 interface NavigationProps {
   homeRef: RefObject<HTMLDivElement>;
@@ -60,12 +60,12 @@ const Navigation: React.FC<NavigationProps> = ({
         >
           운영진
         </Anchor>
-        {/* <Anchor
+        <Anchor
           className={activeSection === "gallery" ? "active" : ""}
           onClick={() => scrollToRef(galleryRef)}
         >
-          사진
-        </Anchor> */}
+          사진첩
+        </Anchor>
         <Anchor
           className={activeSection === "schedule" ? "active" : ""}
           onClick={() => scrollToRef(scheduleRef)}
@@ -78,12 +78,12 @@ const Navigation: React.FC<NavigationProps> = ({
         >
           연락
         </Anchor>
-        <Anchor
+        {/* <Anchor
           className={activeSection === "personalInfo" ? "active" : ""}
           onClick={() => scrollToRef(personalInfoRef)}
         >
           설정
-        </Anchor>
+        </Anchor> */}
       </NavItemsContainer>
       <LoginWrapper>
         <Login />
