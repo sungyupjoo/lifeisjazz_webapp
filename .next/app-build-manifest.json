@@ -11,10 +11,15 @@
       "static/css/app/page.css",
       "static/chunks/app/page.js"
     ],
-    "/JamPortal/page": [
+    "/layout": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/JamPortal/page.js"
+      "static/chunks/app/layout.js"
+    ],
+    "/not-found": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/not-found.js"
     ]
   }
 }
