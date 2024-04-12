@@ -1,8 +1,11 @@
+"use client";
+
 import styled from "@emotion/styled";
 import { logo_white } from "../../public/assets";
 import colors from "../commons/styles/theme";
-import { RefObject } from "react";
-import Login from "./Login";
+import { RefObject, useState } from "react";
+import Login from "./Login/Login";
+import { Hamburger } from "./common/Icons/Hamburger";
 
 interface NavigationProps {
   homeRef: RefObject<HTMLDivElement>;
@@ -25,7 +28,15 @@ const Navigation: React.FC<NavigationProps> = ({
   personalInfoRef,
   activeSection,
 }) => {
+  // NavBar 오픈/클로즈
+  const [isNavOpen, setIsNavOpen] = useState(false);
+  const toggleNav = () => {
+    setIsNavOpen((prev) => !prev);
+    console.log("open");
+  };
+
   const scrollToRef = (ref: RefObject<HTMLDivElement>) => {
+    setIsNavOpen(false);
     if (ref.current) {
       window.scrollTo({
         top: ref.current?.offsetTop,
@@ -41,7 +52,10 @@ const Navigation: React.FC<NavigationProps> = ({
       >
         <Logo alt="logo" src={logo_white} />
       </LogoContainer>
-      <NavItemsContainer>
+      <HamburgerContainer>
+        <Hamburger onClick={toggleNav} size={30} />
+      </HamburgerContainer>
+      <NavItemsContainer className={isNavOpen ? "open" : "closed"}>
         <Anchor
           className={activeSection === "home" ? "active" : ""}
           onClick={() => scrollToRef(homeRef)}
@@ -60,12 +74,12 @@ const Navigation: React.FC<NavigationProps> = ({
         >
           운영진
         </Anchor>
-        {/* <Anchor
+        <Anchor
           className={activeSection === "gallery" ? "active" : ""}
           onClick={() => scrollToRef(galleryRef)}
         >
-          사진
-        </Anchor> */}
+          사진첩
+        </Anchor>
         <Anchor
           className={activeSection === "schedule" ? "active" : ""}
           onClick={() => scrollToRef(scheduleRef)}
@@ -78,12 +92,12 @@ const Navigation: React.FC<NavigationProps> = ({
         >
           연락
         </Anchor>
-        <Anchor
+        {/* <Anchor
           className={activeSection === "personalInfo" ? "active" : ""}
           onClick={() => scrollToRef(personalInfoRef)}
         >
           설정
-        </Anchor>
+        </Anchor> */}
       </NavItemsContainer>
       <LoginWrapper>
         <Login />
@@ -106,6 +120,16 @@ const NavBar = styled.section`
   flex-direction: column;
   justify-content: center;
   align-items: space-between;
+  @media (max-width: 991px) {
+    position: relative;
+    top: 0px;
+    width: 100%;
+    height: 80px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
 `;
 
 const LogoContainer = styled.a`
@@ -121,6 +145,20 @@ const LogoContainer = styled.a`
 const Logo = styled.img`
   width: 156px;
   height: 156px;
+  @media (max-width: 991px) {
+    width: 100px;
+    height: 100px;
+    margin-left: 10px;
+  }
+`;
+
+const HamburgerContainer = styled.div`
+  display: none;
+  cursor: pointer;
+  @media (max-width: 991px) {
+    display: flex;
+    margin-bottom: 0;
+  }
 `;
 
 const NavItemsContainer = styled.section`
@@ -130,6 +168,30 @@ const NavItemsContainer = styled.section`
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
+  transition: max-height 0.3s ease-in-out;
+  @media (max-width: 991px) {
+    display: flex;
+    overflow: hidden;
+    max-height: 0;
+    // TODO: Overlay 깔고 그 위에서 해야 애니메이션 제대로 될듯
+    &.open {
+      position: fixed;
+      display: flex;
+      flex-direction: column;
+      padding: 1rem 0 2rem 1.5rem;
+      justify-content: flex-start;
+      align-items: flex-start;
+      gap: 1.5rem;
+      top: 80px;
+      max-height: 500px;
+      width: 100%;
+      z-index: 300;
+      background-color: ${colors.mainTint};
+    }
+    &.closed {
+      max-height: 0;
+    }
+  }
 `;
 
 const Anchor = styled.a`
@@ -158,4 +220,10 @@ const LoginWrapper = styled.div`
   text-align: center;
   width: 100%;
   margin-bottom: 1.4rem;
+  @media (max-width: 991px) {
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 80px;
+    margin-bottom: 0;
+  }
 `;

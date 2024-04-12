@@ -16,4 +16,9 @@ export const Container = styled.section<{
   border-style: solid;
   border-bottom-width: 1px;
   border-color: ${colors.borderGray};
+  @media (max-width: 991px) {
+    left: 0px;
+    width: 100%;
+    overflow: hidden;
+  }
 `;

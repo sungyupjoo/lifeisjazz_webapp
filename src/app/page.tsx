@@ -9,6 +9,7 @@ import {
   Hero,
   Navigation,
   Manager,
+  Gallery,
 } from "../components";
 import { globalStyles } from "../commons/styles/globalStyles";
 import { useEffect, useRef, useState } from "react";
@@ -89,17 +90,14 @@ function App() {
           <div id="manager" ref={managerRef}>
             <Manager />
           </div>
-          {/* <div id="gallery" ref={galleryRef}>
+          <div id="gallery" ref={galleryRef}>
             <Gallery />
-          </div> */}
+          </div>
           <div id="schedule" ref={scheduleRef}>
             <Schedule />
           </div>
           <div id="contact" ref={contactRef}>
             <Contact />
-          </div>
-          <div id="personalInfo" ref={personalInfoRef}>
-            <PersonalInfo />
           </div>
         </ModalProvider>
       </Container>
