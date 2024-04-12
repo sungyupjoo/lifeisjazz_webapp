@@ -24,13 +24,21 @@ import {
   IconTime,
 } from "./common/Icons";
 import { formatDate } from "../utils/formatDate";
-import { exampleSchedule } from "./contents/exampleSchedule";
+import { ScheduleProps, exampleSchedule } from "./contents/exampleSchedule";
 import moment, { MomentInput } from "moment";
 
 const Schedule = () => {
   // 달력의 날짜
   const today = new Date();
   const [date, setDate] = useState<Value | null>(null);
+  const [selectedSchedule, setSelectedSchedule] = useState<
+    ScheduleProps | undefined
+  >(
+    exampleSchedule.find(
+      (schedule) =>
+        schedule.date === moment(date as MomentInput).format("YYYY-MM-DD")
+    )
+  );
   const [formattedDate, setFormattedDate] = useState<string>(formatDate(today));
   const handleDateChange = (newDate: Value) => {
     setDate(newDate);
@@ -75,7 +83,7 @@ const Schedule = () => {
                         moment(date as MomentInput).format("YYYY-MM-DD")
                     ) && (
                       <Button
-                        backgroundColor={colors.sub}
+                        backgroundColor={colors.main}
                         text="참석"
                         href=""
                         onClick={() => {}}

@@ -1,8 +1,16 @@
-interface SchduleProps {
-  date: Date;
+export interface ScheduleProps {
+  date: string;
+  category: string;
+  title: string;
+  location: string;
+  expense: string;
+  specific: string;
+  image: string;
+  totalNumber: number;
+  participate: number[];
 }
 
-export const exampleSchedule = [
+export const exampleSchedule: ScheduleProps[] = [
   {
     date: "2024-04-14",
     category: "잼데이",
