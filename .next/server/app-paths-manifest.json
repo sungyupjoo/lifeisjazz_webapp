@@ -1,8 +1,3 @@
 {
-  "/page": "app/page.js",
-<<<<<<< HEAD
-  "/JamPortal/page": "app/JamPortal/page.js"
-=======
-  "/auth/page": "app/auth/page.js"
->>>>>>> develop
+  "/page": "app/page.js"
 }

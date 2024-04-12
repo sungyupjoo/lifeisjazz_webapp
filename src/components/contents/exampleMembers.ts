@@ -7,7 +7,7 @@ import {
 } from "../../../public/assets";
 
 interface Member {
-  id: string;
+  id: number;
   nickName: string;
   instrument: string[];
   isManager: boolean;
@@ -16,28 +16,28 @@ interface Member {
 
 export const exampleMembers: Member[] = [
   {
-    id: "1",
+    id: 1,
     nickName: "라스",
     instrument: ["콘트라베이스"],
     isManager: true,
     profileImageUrl: `${manager_las}`,
   },
   {
-    id: "2",
+    id: 2,
     nickName: "winter in 쟂바",
     instrument: ["피아노"],
     isManager: true,
     profileImageUrl: `${manager_js}`,
   },
   {
-    id: "3",
+    id: 3,
     nickName: "신재혁",
     instrument: ["피아노"],
     isManager: true,
     profileImageUrl: `${manager_jaehyuck}`,
   },
   {
-    id: "4",
+    id: 4,
     nickName: "윈튼",
     instrument: ["피아노"],
     isManager: false,

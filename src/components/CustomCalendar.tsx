@@ -3,6 +3,7 @@ import colors from "../commons/styles/theme";
 import Calendar from "react-calendar";
 import { useState } from "react";
 import moment from "moment";
+import { exampleSchedule } from "./contents/exampleSchedule";
 
 // calendar 쓰기 위해 type 설정
 export type ValuePiece = Date | null;
@@ -20,6 +21,10 @@ const CustomCalendar: React.FC<CustomCalendarProps> = ({
   const [activeStartDate, setActiveStartDate] = useState<Date | null>(
     new Date()
   );
+  const today = new Date();
+  // 실제 DB에서 받아오기
+
+  const scheduleDay = exampleSchedule.map((schedule) => schedule.date);
 
   return (
     <CalendarWrapper>
@@ -40,10 +45,40 @@ const CustomCalendar: React.FC<CustomCalendarProps> = ({
           setActiveStartDate(activeStartDate)
         }
         // 일정 표시용
-        // tileContent={({ date, view }) => {
-        //   let html = [];
-        //   return <>{html}</>;
-        // }}
+        tileContent={({ date, view }) => {
+          let html = [];
+
+          // 오늘 날짜 표시
+          if (
+            view === "month" &&
+            date.getMonth() === today.getMonth() &&
+            date.getDate() === today.getDate()
+          ) {
+            html.push(<StyledToday key={"today"}>오늘</StyledToday>);
+          }
+          // 일정 있는 날 표시
+          if (
+            exampleSchedule
+              .map((schedule) => schedule.date)
+              .find((x) => x === moment(date).format("YYYY-MM-DD"))
+          ) {
+            let category = exampleSchedule.find(
+              (schedule) => schedule.date === moment(date).format("YYYY-MM-DD")
+            )?.category;
+            html.push(
+              <ScheduleDay>
+                <StyledDot
+                  key={moment(date).format("YYYY-MM-DD")}
+                  scheduleContent={category}
+                />
+                <ScheduleSpecific scheduleContent={category}>
+                  {category}
+                </ScheduleSpecific>
+              </ScheduleDay>
+            );
+          }
+          return <>{html}</>;
+        }}
       />
     </CalendarWrapper>
   );
@@ -54,6 +89,7 @@ export default CustomCalendar;
 const CalendarWrapper = styled.div`
   margin-top: 2.4rem; 
   display: flex;
+  height: 400px;
   justify-content: center;
   position: relative;
   .react-calendar {
@@ -192,13 +228,33 @@ export const StyledDate = styled.div`
 `;
 
 /* 일정 있는 날짜에 점 표시 스타일 */
-const StyledDot = styled.div`
-  background-color: ${colors.sub};
+const StyledDot = styled.div<{ scheduleContent: string | undefined }>`
+  border-width: 1rem;
+  border: solid
+    ${(props) =>
+      props.scheduleContent === "잼데이" ? colors.subShade : colors.main};
   border-radius: 50%;
-  width: 0.3rem;
-  height: 0.3rem;
-  position: absolute;
-  top: 67%;
-  left: 50%;
+  width: 1.3rem;
+  height: 1.3rem;
   transform: translateX(-50%);
+  position: absolute;
+  top: 5%;
+  left: 51%;
+`;
+
+const StyledToday = styled.p`
+  font-size: 0.8rem;
+  color: white;
+`;
+
+const ScheduleDay = styled.div``;
+
+const ScheduleSpecific = styled.p<{ scheduleContent: string | undefined }>`
+  font-size: 0.8rem;
+  color: white;
+  background-color: ${(props) =>
+    props.scheduleContent === "잼데이" ? colors.subShade : colors.main};
+  margin-top: 0.1rem;
+  padding: 0 0.2rem;
+  border-radius: 0.3rem;
 `;
