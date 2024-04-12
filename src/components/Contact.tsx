@@ -1,8 +1,10 @@
 import styled from "@emotion/styled";
 import KakaoMap from "./KakaoMap";
-import { Button, Container, Title, FlexWrapper } from "./common";
+import { Button, Container, Title, FlexWrapper, StyledModal } from "./common";
 import colors from "../commons/styles/theme";
 import { useState } from "react";
+import Modal from "styled-react-modal";
+import Rules from "./contents/Rules";
 
 const Contact = () => {
   const [ruleModalVisible, setRuleModalVisible] = useState(false);
@@ -58,6 +60,18 @@ const Contact = () => {
           </ContactItem>
         </InnerContainer>
       </FlexWrapper>
+      {ruleModalVisible && (
+        <StyledModal
+          isModalVisible={ruleModalVisible}
+          height="30rem"
+          width="30rem"
+          closeModal={() => {
+            setRuleModalVisible(false);
+          }}
+        >
+          <Rules />
+        </StyledModal>
+      )}
     </Container>
   );
 };

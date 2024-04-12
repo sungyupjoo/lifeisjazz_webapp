@@ -6,7 +6,11 @@ export const metadata = {
   description: "",
 };
 
-export default function RootLayout({ children }: any) {
+interface Props {
+  children: ReactNode;
+}
+
+export default function RootLayout({ children }: Props) {
   return (
     <html lang="en">
       <Script

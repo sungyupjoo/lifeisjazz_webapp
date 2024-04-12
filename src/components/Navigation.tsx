@@ -14,7 +14,6 @@ interface NavigationProps {
   galleryRef: RefObject<HTMLDivElement>;
   scheduleRef: RefObject<HTMLDivElement>;
   contactRef: RefObject<HTMLDivElement>;
-  personalInfoRef: RefObject<HTMLDivElement>;
   activeSection: string | undefined;
 }
 
@@ -25,7 +24,6 @@ const Navigation: React.FC<NavigationProps> = ({
   galleryRef,
   scheduleRef,
   contactRef,
-  personalInfoRef,
   activeSection,
 }) => {
   // NavBar 오픈/클로즈

@@ -7,15 +7,14 @@ import {
   Schedule,
   Contact,
   Hero,
+  Gallery,
   Navigation,
   Manager,
-  Gallery,
 } from "../components";
 import { globalStyles } from "../commons/styles/globalStyles";
 import { useEffect, useRef, useState } from "react";
 import { ModalProvider } from "styled-react-modal";
 import { AuthProvider } from "../context/auth";
-import PersonalInfo from "../components/PersonalInfo";
 
 function App() {
   const homeRef = useRef<HTMLDivElement>(null);
@@ -24,7 +23,6 @@ function App() {
   const galleryRef = useRef<HTMLDivElement>(null);
   const scheduleRef = useRef<HTMLDivElement>(null);
   const contactRef = useRef<HTMLDivElement>(null);
-  const personalInfoRef = useRef<HTMLDivElement>(null);
 
   const [activeSection, setActiveSection] = useState<string>();
   useEffect(() => {
@@ -45,7 +43,6 @@ function App() {
       galleryRef.current,
       scheduleRef.current,
       contactRef.current,
-      personalInfoRef.current,
     ];
     sections.forEach((section) => {
       if (section) observer.observe(section);
@@ -56,15 +53,7 @@ function App() {
         if (section) observer.unobserve(section);
       });
     };
-  }, [
-    homeRef,
-    aboutRef,
-    managerRef,
-    galleryRef,
-    scheduleRef,
-    contactRef,
-    personalInfoRef,
-  ]);
+  }, [homeRef, aboutRef, managerRef, galleryRef, scheduleRef, contactRef]);
 
   return (
     <AuthProvider>
@@ -78,7 +67,6 @@ function App() {
             galleryRef={galleryRef}
             scheduleRef={scheduleRef}
             contactRef={contactRef}
-            personalInfoRef={personalInfoRef}
             activeSection={activeSection}
           />
           <div id="home" ref={homeRef}>
