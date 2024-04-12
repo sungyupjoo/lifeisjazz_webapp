@@ -1,7 +1,10 @@
+"use client";
 import styled from "@emotion/styled";
 import colors from "../../commons/styles/theme";
-import { Button, StyledModal, fadeIn } from "../common";
-import { useState } from "react";
+import { Button, StyledModal } from "../common";
+import { useState, useEffect } from "react";
+import { auth } from "../../firebase/config";
+import { logout } from "./loginFunctions";
 
 declare global {
   interface Window {
@@ -11,7 +14,11 @@ declare global {
 
 const Login = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
-
+  const [userEmail, setUserEmail] = useState<string | undefined | null>("");
+  useEffect(() => {
+    console.log("userEmail: ", userEmail);
+    setUserEmail(auth.currentUser?.email);
+  }, [auth.currentUser]);
   const clickHandler = () => {
     setIsModalVisible(true);
   };
@@ -30,14 +37,17 @@ const Login = () => {
 
     closeModal();
   };
+  const logOutHandler = () => {
+    userEmail && logout(userEmail);
+  };
 
   return (
     <>
       <Button
         backgroundColor={colors.sub}
-        text="로그인"
+        text={userEmail ? "로그아웃" : "로그인"}
         href=""
-        onClick={clickHandler}
+        onClick={!userEmail ? clickHandler : logOutHandler}
       />
       {isModalVisible && (
         <StyledModal
