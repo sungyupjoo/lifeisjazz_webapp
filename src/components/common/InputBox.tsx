@@ -1,3 +1,5 @@
+"use client";
+
 import styled from "@emotion/styled";
 import colors from "../../commons/styles/theme";
 import { useEffect, useState } from "react";

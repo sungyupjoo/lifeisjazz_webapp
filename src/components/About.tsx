@@ -14,9 +14,9 @@ const About = () => (
         <ContentsWrapper key={about.id} index={about.id}>
           <Image src={about.url} />
           <InnerContainer>
-            <h3 style={{ marginBottom: "1.2rem", textAlign: "center" }}>
+            <h4 style={{ marginBottom: "1.2rem", textAlign: "center" }}>
               {about.title}
-            </h3>
+            </h4>
             <p style={{ marginBottom: "0.3rem" }}>{about.content}</p>
           </InnerContainer>
         </ContentsWrapper>

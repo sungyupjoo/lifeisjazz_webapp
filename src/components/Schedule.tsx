@@ -333,7 +333,7 @@ const RedText = styled.span`
   color: ${colors.sub};
 `;
 
-const ItemTitle = styled.h3`
+const ItemTitle = styled.div`
   font-size: 1.2rem;
 `;
 

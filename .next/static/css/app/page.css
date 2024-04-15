@@ -20,6 +20,7 @@
 }
 
 .react-calendar--doubleView .react-calendar__viewContainer > * {
+  width: 50%;
   margin: 0.5em;
 }
 
@@ -154,3 +155,4 @@
 .react-calendar--selectRange .react-calendar__tile--hover {
   background-color: #e6e6e6;
 }
+
