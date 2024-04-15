@@ -1,3 +1,5 @@
+"use client";
+
 import styled from "@emotion/styled";
 import {
   Button,
@@ -22,11 +24,21 @@ import {
   IconTime,
 } from "./common/Icons";
 import { formatDate } from "../utils/formatDate";
+import { ScheduleProps, exampleSchedule } from "./contents/exampleSchedule";
+import moment, { MomentInput } from "moment";
 
 const Schedule = () => {
   // 달력의 날짜
   const today = new Date();
-  const [date, setDate] = useState<Value>(today);
+  const [date, setDate] = useState<Value | null>(null);
+  const [selectedSchedule, setSelectedSchedule] = useState<
+    ScheduleProps | undefined
+  >(
+    exampleSchedule.find(
+      (schedule) =>
+        schedule.date === moment(date as MomentInput).format("YYYY-MM-DD")
+    )
+  );
   const [formattedDate, setFormattedDate] = useState<string>(formatDate(today));
   const handleDateChange = (newDate: Value) => {
     setDate(newDate);
@@ -47,77 +59,161 @@ const Schedule = () => {
         <Wrapper>
           <ItemBigContainer>
             <ItemBigWrapper>
-              <ItemTitle>다음 일정</ItemTitle>
+              <ItemTitleContainer>
+                <TitleAndButtonContainer>
+                  <ItemTitle>{`일정 (${exampleSchedule.length})`}</ItemTitle>
+
+                  <AddButton onClick={addEventHandler}>+</AddButton>
+                </TitleAndButtonContainer>
+                <ButtonContainer>
+                  <Button backgroundColor={colors.sub} text="잼데이" link />
+                </ButtonContainer>
+              </ItemTitleContainer>
+
               <ItemContainer>
-                <TitleContainer>
-                  <ItemSubTitle>
-                    <RedText style={{ marginRight: "1rem" }}>D-2</RedText>{" "}
-                    3/10(일) 오후 3:00
-                  </ItemSubTitle>
-                  <Button
-                    backgroundColor={colors.sub}
-                    text="참석"
-                    href=""
-                    onClick={() => {}}
-                  />
-                </TitleContainer>
-                <ItemTitle>린가드 보러 가요!!</ItemTitle>
-                <ItemContentContainer>
-                  <Photo
-                    src={
-                      "https://image.fmkorea.com/files/attach/new3/20240202/3674493/2188111904/6679407385/6b693f47f5d5454a9f8c1a7bc82a84dd.png"
+                <>
+                  <TitleContainer>
+                    <ItemSubTitle>
+                      {/* <RedText style={{ marginRight: "1rem" }}>D-2</RedText> */}
+                      {formattedDate}
+                    </ItemSubTitle>
+                    {exampleSchedule.find(
+                      (schedule) =>
+                        schedule.date ===
+                        moment(date as MomentInput).format("YYYY-MM-DD")
+                    ) && (
+                      <Button
+                        backgroundColor={colors.main}
+                        text="참석"
+                        href=""
+                        onClick={() => {}}
+                      />
+                    )}
+                  </TitleContainer>
+                  <ItemTitle>
+                    {exampleSchedule.find(
+                      (schedule) =>
+                        schedule.date ===
+                        moment(date as MomentInput).format("YYYY-MM-DD")
+                    )?.title ?? (
+                      <NoContent>해당 날짜엔 일정이 없습니다</NoContent>
+                    )}
+                  </ItemTitle>
+                  <ItemContentContainer>
+                    {exampleSchedule.find(
+                      (schedule) =>
+                        schedule.date ===
+                        moment(date as MomentInput).format("YYYY-MM-DD")
+                    )?.image && (
+                      <Photo
+                        src={
+                          exampleSchedule.find(
+                            (schedule) =>
+                              schedule.date ===
+                              moment(date as MomentInput).format("YYYY-MM-DD")
+                          )?.image
+                        }
+                      />
+                    )}
+                    {exampleSchedule.find(
+                      (schedule) =>
+                        schedule.date ===
+                        moment(date as MomentInput).format("YYYY-MM-DD")
+                    ) && (
+                      <ItemDetailsContainer>
+                        <ItemContentWrapper>
+                          <ItemContent>위치</ItemContent>
+                          <p>
+                            {
+                              exampleSchedule.find(
+                                (schedule) =>
+                                  schedule.date ===
+                                  moment(date as MomentInput).format(
+                                    "YYYY-MM-DD"
+                                  )
+                              )?.location
+                            }
+                          </p>
+                        </ItemContentWrapper>
+                        <ItemContentWrapper>
+                          <ItemContent>비용</ItemContent>
+                          <p>
+                            {
+                              exampleSchedule.find(
+                                (schedule) =>
+                                  schedule.date ===
+                                  moment(date as MomentInput).format(
+                                    "YYYY-MM-DD"
+                                  )
+                              )?.expense
+                            }
+                          </p>
+                        </ItemContentWrapper>
+                        <ParticipantWrapper>
+                          <ItemContentWrapper>
+                            <ItemContent>참석</ItemContent>
+                            <p>
+                              <RedText>
+                                {
+                                  exampleSchedule.find(
+                                    (schedule) =>
+                                      schedule.date ===
+                                      moment(date as MomentInput).format(
+                                        "YYYY-MM-DD"
+                                      )
+                                  )?.participate.length
+                                }
+                              </RedText>{" "}
+                              /
+                              {
+                                exampleSchedule.find(
+                                  (schedule) =>
+                                    schedule.date ===
+                                    moment(date as MomentInput).format(
+                                      "YYYY-MM-DD"
+                                    )
+                                )?.totalNumber
+                              }
+                            </p>
+                          </ItemContentWrapper>
+                          <ItemContentWrapper>
+                            {exampleMembers
+                              .filter((member) =>
+                                exampleSchedule
+                                  .find(
+                                    (schedule) =>
+                                      schedule.date ===
+                                      moment(date as MomentInput).format(
+                                        "YYYY-MM-DD"
+                                      )
+                                  )
+                                  ?.participate.includes(member.id)
+                              )
+                              .map((member) => (
+                                <MemberImage
+                                  key={member.id}
+                                  alt="Member"
+                                  src={member.profileImageUrl}
+                                />
+                              ))}
+                          </ItemContentWrapper>
+                        </ParticipantWrapper>
+                      </ItemDetailsContainer>
+                    )}
+                  </ItemContentContainer>
+                  <ItemSpecific>
+                    {
+                      exampleSchedule.find(
+                        (schedule) =>
+                          schedule.date ===
+                          moment(date as MomentInput).format("YYYY-MM-DD")
+                      )?.specific
                     }
-                  />
-                  <ItemDetailsContainer>
-                    <ItemContentWrapper>
-                      <ItemContent>위치</ItemContent>
-                      <p>서울역</p>
-                    </ItemContentWrapper>
-                    <ItemContentWrapper>
-                      <ItemContent>비용</ItemContent>
-                      <p>10,000원</p>
-                    </ItemContentWrapper>
-                    <ParticipantWrapper>
-                      <ItemContentWrapper>
-                        <ItemContent>참석</ItemContent>
-                        <p>
-                          <RedText>{exampleMembers.length}</RedText> / 10
-                        </p>
-                      </ItemContentWrapper>
-                      <ItemContentWrapper>
-                        {exampleMembers.map((member) => (
-                          <MemberImage
-                            key={member.id}
-                            alt="Member"
-                            src={member.profileImageUrl}
-                          />
-                        ))}
-                      </ItemContentWrapper>
-                    </ParticipantWrapper>
-                  </ItemDetailsContainer>
-                </ItemContentContainer>
+                  </ItemSpecific>
+                </>
               </ItemContainer>
             </ItemBigWrapper>
-            <AddButton onClick={addEventHandler}>+</AddButton>
           </ItemBigContainer>
-          <ItemBigWrapper>
-            <ItemTitle>{formattedDate} 잼</ItemTitle>
-            <ItemContainer>
-              <TitleContainer>
-                <Button
-                  backgroundColor={colors.sub}
-                  text="참석"
-                  href=""
-                  onClick={() => {}}
-                />
-              </TitleContainer>
-              <ItemContentContainer>
-                <ItemSubTitle>
-                  <ItemContent>참석 인원</ItemContent>
-                </ItemSubTitle>
-              </ItemContentContainer>
-            </ItemContainer>
-          </ItemBigWrapper>
         </Wrapper>
       </FlexWrapper>
       {isAddEventModalVisible && (
@@ -160,21 +256,37 @@ const Schedule = () => {
 export default Schedule;
 
 const Wrapper = styled.div`
-  margin-top: 2.4rem;
   display: flex;
   flex-direction: column;
   gap: 2rem;
+  margin-top: 1rem;
 `;
 
 const ItemBigContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100%;
+  margin-top: 1.5rem;
 `;
 
 const ItemBigWrapper = styled.div`
-  height: 100%;
+  height: 344px;
+`;
+
+const ItemTitleContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+`;
+
+const TitleAndButtonContainer = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+const ButtonContainer = styled.div`
+  align-self: flex-end;
 `;
 
 const ItemContainer = styled.div`
@@ -211,6 +323,11 @@ const TitleContainer = styled.div`
   justify-content: space-between;
 `;
 
+const NoContent = styled.h3`
+  font-size: 1.2rem;
+  margin-top: 1.5rem;
+`;
+
 const RedText = styled.span`
   font-family: bold;
   color: ${colors.sub};
@@ -218,7 +335,6 @@ const RedText = styled.span`
 
 const ItemTitle = styled.h3`
   font-size: 1.2rem;
-  margin-bottom: 1rem;
 `;
 
 const ItemContentContainer = styled.div`
@@ -244,6 +360,10 @@ const ItemDetailsContainer = styled.div`
 const ItemContentWrapper = styled.div`
   display: flex;
   gap: 0.6rem;
+`;
+
+const ItemSpecific = styled.p`
+  padding-top: 1rem;
 `;
 
 const ParticipantWrapper = styled.div``;
