@@ -1,6 +1,5 @@
 import styled from "@emotion/styled";
 import { Container, Title } from "./common";
-import Image from "next/image";
 
 const Gallery = () => {
   const photos = [
@@ -17,7 +16,7 @@ const Gallery = () => {
       <Title titleText="사진첩" subTitle="라이재의 활동 내역" />
       <Photos>
         {photos.map((url) => (
-          <StyledImage alt="image" src={url} />
+          <StyledImage alt="image" src={url} key={url} />
         ))}
       </Photos>
     </Container>

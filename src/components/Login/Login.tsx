@@ -45,7 +45,8 @@ const Login = () => {
     <>
       <Button
         backgroundColor={colors.sub}
-        text={userEmail ? "로그아웃" : "로그인"}
+        // text={userEmail ? "로그아웃" : "로그인"}
+        text={"로그인"}
         href=""
         onClick={!userEmail ? clickHandler : logOutHandler}
       />

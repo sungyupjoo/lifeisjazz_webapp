@@ -53,7 +53,7 @@ const Schedule = () => {
 
   return (
     <Container innerPadding backgroundGray>
-      <Title titleText="일정" subTitle="모임 일정 및 잼데이 신청" />{" "}
+      <Title titleText="일정" subTitle="모임 일정 및 잼데이 신청" />
       <FlexWrapper>
         <CustomCalendar date={date} onDateChange={handleDateChange} />
         <Wrapper>
@@ -323,9 +323,9 @@ const TitleContainer = styled.div`
   justify-content: space-between;
 `;
 
-const NoContent = styled.div`
-  position: absolute;
-  top: 50%;
+const NoContent = styled.h3`
+  font-size: 1.2rem;
+  margin-top: 1.5rem;
 `;
 
 const RedText = styled.span`

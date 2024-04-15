@@ -19,6 +19,6 @@ export const Container = styled.section<{
   @media (max-width: 991px) {
     left: 0px;
     width: 100%;
-    overflow: hidden;
+    height: auto;
   }
 `;

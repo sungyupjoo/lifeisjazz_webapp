@@ -66,11 +66,8 @@ const CustomCalendar: React.FC<CustomCalendarProps> = ({
               (schedule) => schedule.date === moment(date).format("YYYY-MM-DD")
             )?.category;
             html.push(
-              <ScheduleDay>
-                <StyledDot
-                  key={moment(date).format("YYYY-MM-DD")}
-                  scheduleContent={category}
-                />
+              <ScheduleDay key={moment(date).format("YYYY-MM-DD")}>
+                <StyledDot scheduleContent={category} />
                 <ScheduleSpecific scheduleContent={category}>
                   {category}
                 </ScheduleSpecific>
