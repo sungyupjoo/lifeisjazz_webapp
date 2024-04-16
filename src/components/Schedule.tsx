@@ -12,7 +12,7 @@ import {
 import "react-calendar/dist/Calendar.css";
 import { useState } from "react";
 import colors from "../commons/styles/theme";
-import CustomCalendar, { Value, ValuePiece } from "./CustomCalendar";
+import CustomCalendar, { Value, ValuePiece } from "./Calendar/CustomCalendar";
 import { exampleMembers } from "./contents/exampleMembers";
 import {
   IconArrowRight,
@@ -333,7 +333,7 @@ const RedText = styled.span`
   color: ${colors.sub};
 `;
 
-const ItemTitle = styled.h3`
+const ItemTitle = styled.div`
   font-size: 1.2rem;
 `;
 

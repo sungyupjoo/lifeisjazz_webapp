@@ -1,9 +1,9 @@
 import styled from "@emotion/styled";
-import colors from "../commons/styles/theme";
+import colors from "../../commons/styles/theme";
 import Calendar from "react-calendar";
 import { useState } from "react";
 import moment from "moment";
-import { exampleSchedule } from "./contents/exampleSchedule";
+import { exampleSchedule } from "../contents/exampleSchedule";
 
 // calendar 쓰기 위해 type 설정
 export type ValuePiece = Date | null;
