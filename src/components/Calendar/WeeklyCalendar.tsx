@@ -14,17 +14,23 @@ import {
 import styled from "@emotion/styled";
 import colors from "../../commons/styles/theme";
 import { ko } from "date-fns/locale";
+import { dateFormat } from "../common/types";
 
 interface WeeklyCalendarProps {
   showDetailsHandle: (dayString: string) => void;
+  selectedDate: Date;
+  onDateChange: (date: Date, dayStr: string) => void;
+  jamDayDate: Date[] | null;
 }
 
 const WeeklyCalendar: React.FC<WeeklyCalendarProps> = ({
   showDetailsHandle,
+  selectedDate,
+  onDateChange,
+  jamDayDate,
 }) => {
   const [currentMonth, setCurrentMonth] = useState(new Date());
   const [currentWeek, setCurrentWeek] = useState(getWeek(currentMonth));
-  const [selectedDate, setSelectedDate] = useState(new Date());
 
   const changeWeekHandle = (btnType: "prev" | "next") => {
     if (btnType === "prev") {
@@ -38,17 +44,14 @@ const WeeklyCalendar: React.FC<WeeklyCalendarProps> = ({
     }
   };
 
-  const onDateClickHandle = (day: Date, dayStr: string) => {
-    setSelectedDate(day);
-    showDetailsHandle(dayStr);
-  };
-
   const renderHeader = () => {
-    const dateFormat = "yy년 MM월";
+    const dateFormatKorean = "yy년 MM월";
     return (
       <Header>
         <HeaderTitle>
-          <h3>{format(currentMonth, dateFormat)}</h3>
+          <HeaderText>
+            {format(currentMonth, dateFormatKorean)} 라이재 잼데이
+          </HeaderText>
         </HeaderTitle>
         <HeaderSub>
           <ColStart>
@@ -68,7 +71,6 @@ const WeeklyCalendar: React.FC<WeeklyCalendarProps> = ({
   };
 
   const renderDays = () => {
-    const dateFormat = "eee";
     const days = [];
     let startDate = startOfWeek(currentMonth, { weekStartsOn: 0 });
     for (let i = 0; i < 7; i++) {
@@ -93,21 +95,22 @@ const WeeklyCalendar: React.FC<WeeklyCalendarProps> = ({
         formattedDate = format(day, dateFormat);
         const cloneDay = day;
         days.push(
-          <CalendarBodyCell
-            className={
-              isSameDay(day, new Date())
-                ? "today"
-                : isSameDay(day, selectedDate)
-                ? "selected"
-                : ""
-            }
-            key={day.toString()}
-            onClick={() => {
-              const dayStr = format(cloneDay, "ccc dd MMM yy");
-              onDateClickHandle(cloneDay, dayStr);
-            }}
-          >
-            <DateText>{formattedDate}</DateText>
+          <CalendarBodyCell key={day.toString()}>
+            <DateText
+              className={
+                isSameDay(day, new Date())
+                  ? "today"
+                  : isSameDay(day, selectedDate)
+                  ? "selected"
+                  : ""
+              }
+              onClick={() => {
+                const dayStr = format(cloneDay, "ccc dd MMM yy");
+                onDateChange(cloneDay, dayStr);
+              }}
+            >
+              {formattedDate}
+            </DateText>
           </CalendarBodyCell>
         );
         day = addDays(day, 1);
@@ -145,6 +148,8 @@ const HeaderTitle = styled.div`
   justify-content: center;
   text-align: center;
 `;
+
+const HeaderText = styled.h3``;
 
 const HeaderSub = styled.div`
   display: flex;
@@ -184,8 +189,8 @@ const Col = styled.div`
   flex-grow: 1;
   flex-basis: 0;
   max-width: 100%;
-  &:first-child {
-    color: red;
+  &:first-of-type {
+    color: ${colors.sub};
   }
 `;
 
@@ -205,25 +210,32 @@ const ColEnd = styled(Col)`
 `;
 
 const CalendarBodyCell = styled(Col)`
-  padding: 1rem;
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
   overflow: hidden;
+  border-top: 1px black solid;
+  padding-top: 0.3rem;
+`;
+
+const DateText = styled.h3`
+  padding: 0.7rem;
+  border-radius: 50%;
   cursor: pointer;
   transition: 0.25s ease-out;
 
-  &:hover {
-    background-color: ${colors.mainTint};
-    transition: 0.25s ease-out;
-  }
   &.selected {
     background-color: ${colors.mainTint};
+    color: white;
   }
   &.today {
     background-color: ${colors.subTint};
+    color: white;
+  }
+  &:hover {
+    background-color: ${colors.mainTint};
+    transition: 0.25s ease-out;
+    color: white;
   }
 `;
-
-const DateText = styled.h3``;
