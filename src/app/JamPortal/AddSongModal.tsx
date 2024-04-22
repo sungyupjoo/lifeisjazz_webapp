@@ -22,7 +22,7 @@ const AddSongModal: React.FC<AddSongModalProps> = ({
     <StyledModal
       closeModal={closeHandler}
       isModalVisible={isVisible}
-      height="30rem"
+      height="33rem"
       width="30rem"
     >
       <AddSongForm onSubmit={handleSubmit}>
@@ -118,6 +118,12 @@ const CustomButton = styled.button`
   color: white;
   background-color: ${colors.sub};
   border-radius: 0.5rem;
-  padding: 0.3rem 1rem;
+  padding: 0.5rem 1rem;
   border: none;
+  width: 50%;
+  cursor: pointer;
+  margin-top: 0.5rem;
+  &:hover {
+    background-color: ${colors.subShade};
+  }
 `;

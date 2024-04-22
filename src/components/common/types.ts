@@ -1,3 +1,5 @@
+import { Timestamp } from "firebase/firestore";
+
 export interface Member {
   id: number;
   nickName: string;
@@ -47,14 +49,19 @@ export type InstrumentType =
   | "etc";
 
 export interface SongProps {
-  date: Date;
+  // date를 Date 타입으로 관리하지 않게 된 것은,
+  // Date로 올리면 firebase에서 timestamp로 변환해서 저장하고
+  // 이것을 읽어올 때 SongProps로 받아올 수 없게 되기 때문
+  // (Timestamp 타입으로 받아오게 하면 SongProps와 호환하는데 있어 문제 발생)
+  id: string;
+  date: string;
   // TODO: context로 로그인한 member의 data를 저장해두고 있어야할듯
   requester?: Member;
   title: string;
   key: KeyType;
   rhythm: RhythmType;
   instruments: InstrumentProps[];
-  details?: string;
+  details: string;
   participants?: Member[];
 }
 

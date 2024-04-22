@@ -7,21 +7,28 @@ import {
   instrumentName,
   rhythmName,
 } from "./common/types";
+import { Button } from "./common";
+import { exampleMembers } from "./contents/exampleMembers";
 
 interface SongFCProps {
   requestedSongs: SongProps[];
   updateParticipant: (title: string, instrument: InstrumentType) => void;
   selectedDate: Date;
+  onCancel: (songId: string) => void;
 }
 
 const Song: React.FC<SongFCProps> = ({
   requestedSongs,
   updateParticipant,
   selectedDate,
+  onCancel,
 }) => {
-  return (
+  const isJamDay = requestedSongs
+    .map((song) => song.date)
+    .includes(selectedDate.toDateString());
+  return isJamDay ? (
     requestedSongs
-      // .filter((song) => song.date === selectedDate)
+      .filter((song) => song.date === selectedDate.toDateString())
       .map((song) => (
         <SongContainer key={song.title}>
           <SongWrapper>
@@ -31,13 +38,24 @@ const Song: React.FC<SongFCProps> = ({
               <Requester>
                 {song.key} / {rhythmName[song.rhythm]}
               </Requester>
+              <Button
+                text="신청취소"
+                backgroundColor={colors.gray}
+                onClick={() =>
+                  onCancel(
+                    exampleMembers[3].nickName +
+                      song.title +
+                      song.details.slice(0, 5)
+                  )
+                }
+              />
             </SongTitleContainer>
             <TotalParticipantContainer>
               {song.instruments.map((instrument, index: number) => (
                 <InstrumentParticipantContainer
                   key={index}
                   onClick={() => {
-                    updateParticipant(song.title, instrument.name);
+                    updateParticipant(song.id, instrument.name);
                   }}
                 >
                   <Instrument>{instrumentName[instrument.name]}</Instrument>
@@ -63,6 +81,10 @@ const Song: React.FC<SongFCProps> = ({
           </Details>
         </SongContainer>
       ))
+  ) : (
+    <NoJam>
+      <h3>이 날은 잼데이 일정이 없습니다</h3>
+    </NoJam>
   );
 };
 
@@ -73,7 +95,7 @@ const SongContainer = styled.div`
   display: flex;
   flex-direction: column;
   margin: 2rem;
-  padding: 1.5rem 2rem 0rem; 3rem;
+  padding: 1.5rem 2rem 0rem; 2rem;
   @media (max-width: 991px) {
     margin: 1rem;
     padding: 1rem;
@@ -94,6 +116,9 @@ const SongTitleContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: 30%;
+  border-radius: 1rem;
+  background-color: ${colors.borderGray};
+  padding: 1rem;
 `;
 
 const SongTitle = styled.h3``;
@@ -121,7 +146,7 @@ const TotalParticipantContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(7, minmax(20px, auto));
   & > div:not(:last-child) {
-    border-right: 1px solid rgba(0, 0, 0, 0.1);
+    // border-right: 1px solid rgba(0, 0, 0, 0.1);
   }
   @media (max-width: 991px) {
     display: flex;
@@ -164,4 +189,12 @@ const MemberImage = styled.img`
 const Participant = styled.p`
   text-align: center;
   font-family: regular;
+`;
+
+const NoJam = styled.div`
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 50vh;
+  align-items: center;
 `;

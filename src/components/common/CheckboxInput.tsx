@@ -22,7 +22,7 @@ const CheckboxInput: React.FC<CheckBoxInputProps> = ({
         value={id}
         defaultChecked={defaultChecked}
       />
-      <InstrumentLabel htmlFor={id}>{value}</InstrumentLabel>
+      <InstrumentLabel>{value}</InstrumentLabel>
     </InstrumentContainer>
   );
 };
