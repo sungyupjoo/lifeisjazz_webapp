@@ -1,9 +1,17 @@
 import styled from "@emotion/styled";
 import { IconProps } from ".";
 
-export const IconXMark: React.FC<IconProps> = ({ size, onClick }) => {
+interface XMarkProps extends IconProps {
+  position?: "absolute" | "relative";
+}
+
+export const IconXMark: React.FC<XMarkProps> = ({
+  size,
+  onClick,
+  position = "absolute",
+}) => {
   return (
-    <Container onClick={onClick}>
+    <Container onClick={onClick} position={position}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
@@ -24,9 +32,9 @@ export const IconXMark: React.FC<IconProps> = ({ size, onClick }) => {
   );
 };
 
-const Container = styled.div`
-  position: absolute;
-  top: 20px;
-  right: 20px;
+const Container = styled.div<{ position: "absolute" | "relative" }>`
+  position: ${(props) => props.position};
+  top: ${(props) => (props.position === "absolute" ? "20px" : "0")};
+  right: ${(props) => (props.position === "absolute" ? "20px" : "0")};
   cursor: pointer;
 `;
