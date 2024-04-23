@@ -209,7 +209,7 @@ const JamDayPortal = () => {
             onClick={openAddSongModal}
           />
         </AddSongButtonContainer>
-
+        <p>간단히 보기 toggle slider</p>
         <Song
           requestedSongs={requestedSongs}
           updateParticipant={updateHandler}

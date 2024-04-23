@@ -55,6 +55,7 @@ export const Button: React.FC<ButtonProps> = ({
 
 const ButtonContainer = styled.div<{ backgroundColor: string }>`
   background-color: ${(props) => props.backgroundColor};
+  word-break: keep-all;
   text-align: center;
   margin-top: 5px;
   margin-right: 5px;
