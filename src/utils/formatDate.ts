@@ -1,4 +1,5 @@
-import { Value } from "../components/CustomCalendar";
+import { Timestamp } from "firebase/firestore";
+import { Value } from "../components/Calendar/CustomCalendar";
 
 export const formatDate = (date: Value): string => {
   const formatSingleDate = (date: Date) => {

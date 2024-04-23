@@ -5,14 +5,7 @@ import {
   manager_bins,
   member_skipper,
 } from "../../../public/assets";
-
-interface Member {
-  id: number;
-  nickName: string;
-  instrument: string[];
-  isManager: boolean;
-  profileImageUrl: string;
-}
+import { Member } from "../common/types";
 
 export const exampleMembers: Member[] = [
   {
