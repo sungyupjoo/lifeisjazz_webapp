@@ -132,7 +132,7 @@ export default WeeklyCalendar;
 const Header = styled.div`
   display: block;
   width: 100%;
-  padding: 3rem 0;
+  padding: 4rem 0 3rem;
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
@@ -144,6 +144,7 @@ const HeaderWrapper = styled.div`
   display: flex;
   flex-direction: row;
   padding: 1rem 4rem 0 4rem;
+  align-items: center;
 `;
 
 const Button = styled.div`
@@ -185,7 +186,8 @@ const Col = styled.div`
 
 const ColStart = styled(Col)`
   justify-content: flex-start;
-  text-align: left;
+  text-align: right;
+  margin-right: 2rem;
 `;
 
 const ColCenter = styled(Col)`
@@ -195,7 +197,8 @@ const ColCenter = styled(Col)`
 
 const ColEnd = styled(Col)`
   justify-content: flex-end;
-  text-align: right;
+  text-align: left;
+  margin-left: 2rem;
 `;
 
 const CalendarBodyCell = styled(Col)`

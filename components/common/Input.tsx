@@ -7,6 +7,7 @@ interface InputProps {
   type: React.HTMLInputTypeAttribute;
   name: string;
   required?: boolean;
+  defaultValue?: string;
 }
 
 const CustomInput: React.FC<InputProps> = ({
@@ -14,10 +15,17 @@ const CustomInput: React.FC<InputProps> = ({
   type,
   name,
   required = false,
+  defaultValue,
 }) => {
   return (
     <InputContainer>
-      <Input id={id} type={type} name={name} required={required} />
+      <Input
+        id={id}
+        type={type}
+        name={name}
+        required={required}
+        defaultValue={defaultValue || ""}
+      />
       <Bar />
     </InputContainer>
   );

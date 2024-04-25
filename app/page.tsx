@@ -24,7 +24,6 @@ function App({ pageProps }: AppProps) {
   const galleryRef = useRef<HTMLDivElement>(null);
   const scheduleRef = useRef<HTMLDivElement>(null);
   const contactRef = useRef<HTMLDivElement>(null);
-
   const [activeSection, setActiveSection] = useState<string>();
   useEffect(() => {
     const observer = new IntersectionObserver(

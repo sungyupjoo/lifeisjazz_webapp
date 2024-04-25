@@ -23,6 +23,8 @@ const Song: React.FC<SongFCProps> = ({
   selectedDate,
   onCancel,
 }) => {
+  // TODO: 잼데이로 결정되었는데 곡이 안 올라온 경우에 대해...
+  // 잼데이들을 보관하는 db가 있고,
   const isJamDay = requestedSongs
     .map((song) => song.date)
     .includes(selectedDate.toDateString());

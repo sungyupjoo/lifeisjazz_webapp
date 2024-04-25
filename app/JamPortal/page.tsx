@@ -1,5 +1,5 @@
 "use client";
-
+import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { startOfDay } from "date-fns";
 import { globalStyles } from "../../styles/globalStyles";
@@ -18,9 +18,10 @@ import {
   SongProps,
 } from "../../components/common/types";
 import { exampleMembers } from "../../components/contents/exampleMembers";
-import { Timestamp, doc, getDoc, onSnapshot, setDoc } from "firebase/firestore";
+import { doc, onSnapshot, setDoc } from "firebase/firestore";
 import { db } from "../../firebase/config";
 import CancelSongModal from "./CancelSongModal";
+import { logo_black } from "../../public/assets";
 
 const JamDayPortal = () => {
   const [selectedDate, setSelectedDate] = useState(startOfDay(new Date()));
@@ -196,6 +197,11 @@ const JamDayPortal = () => {
     <>
       <Global styles={globalStyles} />
       <ModalProvider>
+        <LogoContainer>
+          <LogoWrapper href={"../"}>
+            <LogoImage src={logo_black} />
+          </LogoWrapper>
+        </LogoContainer>
         <WeeklyCalendar
           selectedDate={selectedDate}
           onDateChange={handleDateChange}
@@ -209,7 +215,7 @@ const JamDayPortal = () => {
             onClick={openAddSongModal}
           />
         </AddSongButtonContainer>
-        <p>간단히 보기 toggle slider</p>
+        {/* <p>간단히 보기 toggle slider</p> */}
         <Song
           requestedSongs={requestedSongs}
           updateParticipant={updateHandler}
@@ -239,6 +245,27 @@ const JamDayPortal = () => {
 };
 
 export default JamDayPortal;
+
+const LogoContainer = styled.div`
+  position: absolute;
+  margin-left: 1rem;
+  width: 100px;
+  height: 100px;
+`;
+
+const LogoWrapper = styled(Link)`
+  cursor: pointer;
+`;
+
+const LogoImage = styled.img`
+  width: 156px;
+  height: 156px;
+  @media (max-width: 991px) {
+    width: 100px;
+    height: 100px;
+    margin-left: 10px;
+  }
+`;
 
 const AddSongButtonContainer = styled.div`
   display: flex;

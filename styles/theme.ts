@@ -7,6 +7,7 @@ const enum colors {
   borderGray = "#e1e1e1",
   mainShade = "#24323f",
   mainTint = "#576572",
+  mainBrightTint = "#6c7884",
   subShade = "#a6333e",
   subTint = "#d96671",
 }

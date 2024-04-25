@@ -82,6 +82,9 @@ const WrapperSpaceBetween = styled(FlexWrapper)`
   justify-content: space-between;
   align-items: center;
   margin-bottom: 0.8rem;
+  @media (max-width: 991px) {
+    flex-direction: row;
+  }
 `;
 
 const ContactItem = styled.div`
@@ -91,7 +94,9 @@ const ContactItem = styled.div`
 
 const MiniTitle = styled.h3``;
 
-const Content = styled.p``;
+const Content = styled.p`
+  word-break: keep-all;
+`;
 
 const SpanGray = styled.span`
   background-color: ${colors.gray};

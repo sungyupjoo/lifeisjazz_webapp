@@ -6,6 +6,7 @@ import colors from "../styles/theme";
 import { RefObject, useState } from "react";
 import Login from "./Login/Login";
 import { Hamburger } from "./common/Icons/Hamburger";
+import { useSession } from "next-auth/react";
 
 interface NavigationProps {
   homeRef: RefObject<HTMLDivElement>;
@@ -42,6 +43,10 @@ const Navigation: React.FC<NavigationProps> = ({
       });
     }
   };
+
+  // 로그인 시 이름 띄움
+  const { data: session } = useSession();
+
   return (
     <NavBar>
       <LogoContainer
@@ -215,11 +220,13 @@ const Anchor = styled.a`
 `;
 
 const LoginWrapper = styled.div`
+  display: flex;
   text-align: center;
+  justify-content: center;
+  align-items: center;
   width: 100%;
   margin-bottom: 1.4rem;
   @media (max-width: 991px) {
-    display: flex;
     justify-content: flex-end;
     margin-right: 80px;
     margin-bottom: 0;

@@ -14,9 +14,7 @@ const About = () => (
         <ContentsWrapper key={about.id} index={about.id}>
           <Image src={about.url} />
           <InnerContainer>
-            <h4 style={{ marginBottom: "1.2rem", textAlign: "center" }}>
-              {about.title}
-            </h4>
+            <InnerTitle>{about.title}</InnerTitle>
             <p style={{ marginBottom: "0.3rem" }}>{about.content}</p>
           </InnerContainer>
         </ContentsWrapper>
@@ -33,6 +31,10 @@ const ContentsContainer = styled.div`
   grid-template-columns: repeat(4, 1fr);
   justify-contents: space-between;
   gap: 2rem;
+  @media (max-width: 991px) {
+    display: flex;
+    flex-direction: column;
+  }
 `;
 
 const ContentsWrapper = styled.div<{ index: number }>`
@@ -47,10 +49,25 @@ const ContentsWrapper = styled.div<{ index: number }>`
   }
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
   flex-grow: 0;
+  @media (max-width: 991px) {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+  }
+  transition: transform 0.3s ease-in-out;
+  &:hover {
+    scale: 1.1;
+    opacity: 1.1;
+  }
 `;
 
 const InnerContainer = styled.div`
   padding: 0 16px;
+  @media (max-width: 991px) {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
 `;
 
 const Image = styled.img`
@@ -60,4 +77,17 @@ const Image = styled.img`
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
   flex-grow: 0;
+  @media (max-width: 991px) {
+    margin-bottom: 0;
+    border-bottom-left-radius: 8px;
+    border-top-right-radius: 0;
+  }
+`;
+
+const InnerTitle = styled.h4`
+  margin-bottom: 1.2rem;
+  text-align: center;
+  font-family: semibold;
+  @media (max-width: 991px) {
+  }
 `;

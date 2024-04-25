@@ -273,11 +273,12 @@ const ItemBigWrapper = styled.div`
   height: 344px;
 `;
 
-const ItemTitleContainer = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 1rem;
+const ButtonContainer = styled.div`
+  align-self: flex-end;
+  @media (max-width: 991px) {
+    margin-top: 1rem;
+    align-self: flex-start;
+  }
 `;
 
 const TitleAndButtonContainer = styled.div`
@@ -285,8 +286,15 @@ const TitleAndButtonContainer = styled.div`
   align-items: center;
 `;
 
-const ButtonContainer = styled.div`
-  align-self: flex-end;
+const ItemTitleContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+  @media (max-width: 991px) {
+    flex-direction: column;
+    justify-content: flex-start;
+  }
 `;
 
 const ItemContainer = styled.div`
@@ -299,6 +307,9 @@ const ItemContainer = styled.div`
     background-color: ${colors.borderGray};
   }
   height: 100%;
+  @media (max-width: 991px) {
+    display: none;
+  }
 `;
 
 const AddButton = styled.div`
