@@ -84,6 +84,7 @@ const WrapperSpaceBetween = styled(FlexWrapper)`
   margin-bottom: 0.8rem;
   @media (max-width: 991px) {
     flex-direction: row;
+    justify-content: flex-start;
   }
 `;
 
@@ -96,6 +97,9 @@ const MiniTitle = styled.h3``;
 
 const Content = styled.p`
   word-break: keep-all;
+  @media (max-width: 576px) {
+    font-size: 0.9rem;
+  }
 `;
 
 const SpanGray = styled.span`

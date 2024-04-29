@@ -72,10 +72,17 @@ export default AddSongModal;
 const AddSongForm = styled.form`
   font-family: semibold;
   font-size: 1.3rem;
+  @media (max-width: 576px) {
+    font-size: 1.2rem;
+  }
 `;
 const FormSection = styled.div`
   display: flex;
   margin-bottom: 1.5rem;
+  align-items: center;
+  @media (max-width: 576px) {
+    margin-bottom: 1.2rem;
+  }
 `;
 
 const FieldSet = styled.fieldset`
@@ -85,6 +92,9 @@ const FieldSet = styled.fieldset`
 const Label = styled.label`
   width: 30%;
   min-width: 7rem;
+  @media (max-width: 576px) {
+    font-size: 1.2rem;
+  }
 `;
 
 const Legend = styled.legend`
@@ -98,13 +108,13 @@ const InstrumentGrid = styled.div`
 `;
 
 const StyledSelect = styled(Select)`
-cursor: pointer:
-display: inline-block;
-position: relative;
-font-family: regular;
-font-size: 1rem;
-color: black;
-width: 60%;
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  font-family: regular;
+  font-size: 1rem;
+  color: black;
+  width: 60%;
 `;
 
 const ButtonWrapper = styled.div`
@@ -125,5 +135,9 @@ const CustomButton = styled.button`
   margin-top: 0.5rem;
   &:hover {
     background-color: ${colors.subShade};
+  }
+  @media (max-width: 576px) {
+    font-size: 0.9rem;
+    width: 40%;
   }
 `;

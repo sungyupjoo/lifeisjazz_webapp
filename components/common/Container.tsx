@@ -11,6 +11,9 @@ export const Container = styled.section<{
   height: 100vh;
   flex: 1;
   padding: ${(props) => (props.innerPadding ? "64px 40px" : "")};
+  @media (max-width: 576px) {
+    padding: ${(props) => (props.innerPadding ? "64px 24px" : "")};
+  }
   background-color: ${(props) =>
     props.backgroundGray ? colors.backgroundGray : "white"};
   border-style: solid;

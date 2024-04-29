@@ -162,18 +162,27 @@ export const globalStyles = css`
     font-family: bold;
     font-size: 6.4rem;
     color: #313131;
+    @media (max-width: 576px) {
+      font-size: 4.2rem;
+    }
   }
 
   h2 {
     font-family: bold;
     font-size: 3.2rem;
     color: #313131;
+    @media (max-width: 576px) {
+      font-size: 2.4rem;
+    }
   }
 
   h3 {
     font-family: semibold;
     font-size: 1.6rem;
     color: #313131;
+    @media (max-width: 576px) {
+      font-size: 1.2rem;
+    }
   }
 
   h4 {
@@ -188,5 +197,8 @@ export const globalStyles = css`
     color: rgba(0, 0, 0, 0.74);
     line-height: 1.6rem;
     word-break: keep-all;
+    @media (max-width: 576px) {
+      font-size: 0.9rem;
+    }
   }
 `;

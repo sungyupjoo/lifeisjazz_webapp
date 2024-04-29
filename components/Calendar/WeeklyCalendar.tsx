@@ -52,9 +52,10 @@ const WeeklyCalendar: React.FC<WeeklyCalendarProps> = ({
             >{`< 이전 주`}</Button>
           </ColStart>
           <HeaderText>
-            {format(currentMonth, dateFormatKorean)} 라이재 잼데이
+            {format(currentMonth, dateFormatKorean)}
+            <br />
+            라이재 잼데이
           </HeaderText>
-
           <ColEnd>
             <Button
               onClick={() => changeWeekHandle("next")}
@@ -91,23 +92,25 @@ const WeeklyCalendar: React.FC<WeeklyCalendarProps> = ({
         const cloneDay = day;
         days.push(
           <CalendarBodyCell key={day.toString()}>
-            <DateText
-              className={
-                isSameDay(day, new Date())
-                  ? "today"
-                  : isSameDay(day, selectedDate)
-                  ? "selected"
-                  : ""
-              }
-              onClick={() => {
-                onDateChange(cloneDay);
-              }}
-            >
-              {isSameDay(day, new Date()) && <TodayText>오늘</TodayText>}
+            <DateTextContainer>
+              <DateText
+                className={
+                  isSameDay(day, new Date())
+                    ? "today"
+                    : isSameDay(day, selectedDate)
+                    ? "selected"
+                    : ""
+                }
+                onClick={() => {
+                  onDateChange(cloneDay);
+                }}
+              >
+                {isSameDay(day, new Date()) && <TodayText>오늘</TodayText>}
 
-              {formattedDate}
-              {jamDayDate?.includes(day.toDateString()) && <JamDayPoint />}
-            </DateText>
+                {formattedDate}
+                {jamDayDate?.includes(day.toDateString()) && <JamDayPoint />}
+              </DateText>
+            </DateTextContainer>
           </CalendarBodyCell>
         );
         day = addDays(day, 1);
@@ -132,19 +135,28 @@ export default WeeklyCalendar;
 const Header = styled.div`
   display: block;
   width: 100%;
-  padding: 4rem 0 3rem;
+  padding: 4.5rem 0 2rem;
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
+  @media (max-width: 576px) {
+    padding-bottom: 0.5rem;
+  }
 `;
 
-const HeaderText = styled.h3``;
+const HeaderText = styled.h3`
+  text-align: center;
+`;
 
 const HeaderWrapper = styled.div`
   display: flex;
   flex-direction: row;
   padding: 1rem 4rem 0 4rem;
   align-items: center;
+  @media (max-width: 576px) {
+    padding: 1rem;
+    text-align: center;
+  }
 `;
 
 const Button = styled.div`
@@ -155,6 +167,7 @@ const Button = styled.div`
     color: ${colors.sub};
   }
   font-family: regular;
+  word-break: keep-all;
 `;
 
 const DayBody = styled.div`
@@ -182,12 +195,19 @@ const Col = styled.div`
   &:first-of-type {
     color: ${colors.sub};
   }
+  font-size: 0.9rem;
 `;
 
 const ColStart = styled(Col)`
   justify-content: flex-start;
   text-align: right;
-  margin-right: 2rem;
+  margin-right: 6rem;
+  @media (max-width: 991px) {
+    margin-right: 4rem;
+  }
+  @media (max-width: 576px) {
+    margin-right: 1rem;
+  }
 `;
 
 const ColCenter = styled(Col)`
@@ -198,7 +218,13 @@ const ColCenter = styled(Col)`
 const ColEnd = styled(Col)`
   justify-content: flex-end;
   text-align: left;
-  margin-left: 2rem;
+  margin-left: 6rem;
+  @media (max-width: 991px) {
+    margin-left: 4rem;
+  }
+  @media (max-width: 576px) {
+    margin-left: 1rem;
+  }
 `;
 
 const CalendarBodyCell = styled(Col)`
@@ -210,6 +236,8 @@ const CalendarBodyCell = styled(Col)`
   border-top: 1px black solid;
   padding-top: 0.3rem;
 `;
+
+const DateTextContainer = styled.div``;
 
 const DateText = styled.h3`
   padding: 0.7rem;
@@ -230,6 +258,9 @@ const DateText = styled.h3`
     transition: 0.25s ease-out;
     color: white;
   }
+  @media (max-width: 576px) {
+    padding: 0.5rem;
+  }
 `;
 
 const TodayText = styled.div`
@@ -240,6 +271,9 @@ const TodayText = styled.div`
   justify-content: center;
   font-size: 0.6rem;
   color: white;
+  @media (max-width: 576px) {
+    font-size: 0.5rem;
+  }
 `;
 
 const JamDayPoint = styled.div`
@@ -250,4 +284,8 @@ const JamDayPoint = styled.div`
   border-radius: 50%;
   left: 50%;
   transform: translateX(-50%);
+  @media (max-width: 576px) {
+    width: 7px;
+    height: 7px;
+  }
 `;
