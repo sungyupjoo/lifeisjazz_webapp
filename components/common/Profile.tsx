@@ -27,7 +27,7 @@ const ProfileContainer = styled.div`
   word-break: keep-all;
   cursor: pointer;
   max-width: 8rem;
-  background-color: ${colors.mainBrightTint};
+  background-color: ${colors.mainTint};
   padding: 0.5rem 1rem;
   border-radius: 0.5rem;
   &:hover {

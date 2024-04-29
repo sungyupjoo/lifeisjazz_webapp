@@ -178,7 +178,7 @@ const JamDayPortal = () => {
   const cancelHandler = async (songId: string) => {
     // setCancelSongModalVisible((prev) => !prev);
     const updatedData = requestedSongs.filter((song) => song.id !== songId);
-    console.log("clickwd");
+    console.log("click됌");
     const docRef = await setDoc(
       doc(db, "jamday", startOfDay(selectedDate).toDateString()),
       {

@@ -7,7 +7,7 @@ import { signIn, useSession, signOut } from "next-auth/react";
 import { UserProps } from "../common/types";
 import Profile from "../common/Profile";
 import ProfileModal from "../common/ProfileModal";
-import { doc, getDoc, setDoc } from "firebase/firestore";
+import { doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
 import { db } from "../../firebase/config";
 
 declare global {
@@ -41,7 +41,6 @@ const Login = () => {
           const docRef = doc(db, "members", session?.user?.email);
           const docSnap = await getDoc(docRef);
           if (docSnap.exists()) {
-            console.log(docSnap.data());
           } else {
             if (user) {
               const { email, image, name } = user;
@@ -76,34 +75,23 @@ const Login = () => {
   ) => {
     event.preventDefault();
     const fd = new FormData(event.currentTarget);
-    const data: UserProps = {
-      name: fd.get("nickname") as string,
-      email: user?.email as string,
-      image: fd.get("profileImage") as string,
-    };
-    console.log(data, "새 데이터");
-    // TODO: firebase의 회원 정보와 연동할 것
-    // try {
-    //   const docRef = await setDoc(
-    //     doc(db, "jamday", startOfDay(selectedDate).toDateString()),
-    //     {
-    //       data: [...requestedSongs, data],
-    //     },
-    //     { merge: true }
-    //   );
+    const name = fd.get("nickname" as string);
+    const image = fd.get("profileImage");
+    console.log(image);
 
-    //   const jamdayDocRef = await setDoc(
-    //     doc(
-    //       db,
-    //       "jamday",
-    //       `${selectedDate.getFullYear()} ${selectedDate.getMonth() + 1}`
-    //     ),
-    //     { jamday: [...jamDayDate, selectedDate.toDateString()] },
-    //     { merge: true }
-    //   );
-    // } catch (e) {
-    //   console.error("에러메시지", e);
-    // }
+    try {
+      if (user?.email) {
+        const docRef = doc(db, "members", user?.email);
+        await updateDoc(docRef, {
+          name: name,
+          // image: fd.get("profileImage" as string),
+        });
+      } else {
+        console.warn("이메일 없음");
+      }
+    } catch (e) {
+      console.error("에러메시지", e);
+    }
     setIsProfileModalVisible(false);
   };
 

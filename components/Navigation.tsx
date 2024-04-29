@@ -44,9 +44,6 @@ const Navigation: React.FC<NavigationProps> = ({
     }
   };
 
-  // 로그인 시 이름 띄움
-  const { data: session } = useSession();
-
   return (
     <NavBar>
       <LogoContainer
