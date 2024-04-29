@@ -96,6 +96,11 @@ const CalendarWrapper = styled.div`
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
     background-color: white;
   }
+  .react-calendar {
+    @media(max-width: 576px){
+     width: 100%; 
+    }
+  }
 
   /* 네비게이션 가운데 정렬 */
   .react-calendar__navigation {
@@ -242,6 +247,9 @@ const StyledDot = styled.div<{ scheduleContent: string | undefined }>`
 const StyledToday = styled.p`
   font-size: 0.8rem;
   color: white;
+  @media (max-width: 576px) {
+    font-size: 0.65rem;
+  }
 `;
 
 const ScheduleDay = styled.div``;
@@ -254,4 +262,7 @@ const ScheduleSpecific = styled.p<{ scheduleContent: string | undefined }>`
   margin-top: 0.1rem;
   padding: 0 0.2rem;
   border-radius: 0.3rem;
+  @media (max-width: 576px) {
+    font-size: 0.65rem;
+  }
 `;

@@ -60,6 +60,9 @@ const TitleWrapper = styled.div`
   justify-content: center;
   text-align: center;
   animation: ${bounce} 1s ease;
+  @media (max-width: 576px) {
+    top: 24%;
+  }
 `;
 
 const Title = styled.h1`
@@ -80,4 +83,7 @@ const ButtonWrapper = styled.div`
   margin-top: 3rem;
   position: relative;
   text-align: center;
+  @media (max-width: 576px) {
+    margin-top: 0.6rem;
+  }
 `;

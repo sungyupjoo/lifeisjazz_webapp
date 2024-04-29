@@ -38,12 +38,12 @@ const Manager = () => {
           >
             <UpperContainer>
               <Photo src={item.url} />
-              <RightContainer>
-                <Position>{item.position}</Position>
-                <Name>{item.name}</Name>
-                <Introduction>{item.introduction}</Introduction>
-              </RightContainer>
             </UpperContainer>
+            <RightContainer>
+              <Position>{item.position}</Position>
+              <Name>{item.name}</Name>
+              <Introduction>{item.introduction}</Introduction>
+            </RightContainer>
           </TestimonialWrapper>
         ))}
       </TestimonialContainer>
@@ -58,13 +58,18 @@ const TestimonialContainer = styled.div`
   grid-template-columns: 1fr 1fr;
   margin-top: 4rem;
   gap: 36px;
+  @media (max-width: 576px) {
+    display: flex;
+    flex-direction: column;
+  }
 `;
 
 const TestimonialWrapper = styled.div<{ index: number; isVisible: boolean }>`
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: center;
-  padding: 1.4rem 0;
+  gap: 1rem;
+  padding: 1.4rem 1rem;
   border-radius: 10px;
   &:hover {
     background-color: ${colors.borderGray};
@@ -73,6 +78,11 @@ const TestimonialWrapper = styled.div<{ index: number; isVisible: boolean }>`
     props.isVisible
       ? `${bounce} 1s ease ${props.index * 0.2}s forwards`
       : "none"};
+  @media (max-width: 991px) {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+  }
 `;
 
 const UpperContainer = styled.div`

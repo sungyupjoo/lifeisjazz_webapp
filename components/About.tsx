@@ -58,10 +58,14 @@ const ContentsWrapper = styled.div<{ index: number }>`
     scale: 1.1;
     opacity: 1.1;
   }
+  @media (max-width: 576px) {
+    display: flex;
+    flex-direction: column;
+  }
 `;
 
 const InnerContainer = styled.div`
-  padding: 0 16px;
+  padding: 1rem;
   @media (max-width: 991px) {
     display: flex;
     flex-direction: column;
@@ -81,6 +85,10 @@ const Image = styled.img`
     margin-bottom: 0;
     border-bottom-left-radius: 8px;
     border-top-right-radius: 0;
+  }
+  @media (max-width: 576px) {
+    border-top-right-radius: 8px;
+    border-bottom-left-radius: 0;
   }
 `;
 

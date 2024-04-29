@@ -49,9 +49,12 @@ font-size: 1.2rem;
     outline: none;
     }
   }
+  @media(max-width: 576px){
+    font-size: 0.9rem;
+  }
 `;
 
 const Bar = styled.div`
   background-color: ${colors.gray};
-  height: 2px;
+  height: 1.5px;
 `;

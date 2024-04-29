@@ -33,12 +33,15 @@ const Song: React.FC<SongFCProps> = ({
       .filter((song) => song.date === selectedDate.toDateString())
       .map((song) => (
         <SongContainer key={song.title}>
+          <p># {requestedSongs.indexOf(song) + 1}</p>
           <SongWrapper>
             <SongTitleContainer>
               <Requester>{`신청자: ${song.requester?.nickName}`}</Requester>
               <SongTitle>{song.title}</SongTitle>
               <Requester>
-                {song.key} / {rhythmName[song.rhythm]}
+                {song.key}
+                <br />
+                {rhythmName[song.rhythm]}
               </Requester>
               <Button
                 text="신청취소"
@@ -50,6 +53,7 @@ const Song: React.FC<SongFCProps> = ({
                       song.details.slice(0, 5)
                   )
                 }
+                margin={0}
               />
             </SongTitleContainer>
             <TotalParticipantContainer>
@@ -79,6 +83,7 @@ const Song: React.FC<SongFCProps> = ({
             </TotalParticipantContainer>
           </SongWrapper>
           <Details>
+            <Detail>신청자 커멘트</Detail>
             <p>{song.details}</p>
           </Details>
         </SongContainer>
@@ -98,29 +103,36 @@ const SongContainer = styled.div`
   flex-direction: column;
   margin: 2rem;
   padding: 1.5rem 2rem 0rem; 2rem;
+  background-color: ${colors.backgroundGray};
   @media (max-width: 991px) {
     margin: 1rem;
     padding: 1rem;
   }
-  background-color: ${colors.backgroundGray};
 `;
 
 const SongWrapper = styled.div`
   display: flex;
   padding-bottom: 1rem;
+  margin-top: 1rem;
   margin-bottom: 1rem;
   border-bottom: 1px black solid;
+  @media (max-width: 576px) {
+    flex-direction: column;
+  }
 `;
 
 const SongTitleContainer = styled.div`
   margin-right: 2rem;
   justify-content: center;
-  display: flex;
   flex-direction: column;
   width: 30%;
   border-radius: 1rem;
   background-color: ${colors.borderGray};
   padding: 1rem;
+  @media (max-width: 576px) {
+    width: 100%;
+    margin: 0.5rem 0 1rem;
+  }
 `;
 
 const SongTitle = styled.h3``;
@@ -128,11 +140,10 @@ const SongTitle = styled.h3``;
 const Requester = styled.p``;
 
 const InstrumentParticipantContainer = styled.div`
-  // background-color: ${colors.borderGray};
   padding: 0.5rem;
   border-radius: 20px;
+  border: 1px solid ${colors.borderGray};
   gap: 1rem;
-
   &:hover {
     background-color: ${colors.borderGray};
     cursor: pointer;
@@ -147,9 +158,7 @@ const TotalParticipantContainer = styled.div`
   width: 100%;
   display: grid;
   grid-template-columns: repeat(7, minmax(20px, auto));
-  & > div:not(:last-child) {
-    // border-right: 1px solid rgba(0, 0, 0, 0.1);
-  }
+  column-gap: 1rem;
   @media (max-width: 991px) {
     display: flex;
     flex-direction: column;
@@ -162,6 +171,15 @@ const TotalParticipantContainer = styled.div`
 const Instrument = styled.div`
   text-align: center;
   font-family: semibold;
+  @media (max-width: 991px) {
+    margin-left: 0.5rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    text-align: left;
+  }
+  @media (max-width: 576px) {
+    width: 3rem;
+  }
 `;
 
 const Details = styled.div`
@@ -193,10 +211,16 @@ const Participant = styled.p`
   font-family: regular;
 `;
 
+const Detail = styled.p`
+  font-family: semibold;
+  font-size: 1rem;
+  margin-bottom: 0.6rem;
+`;
+
 const NoJam = styled.div`
   display: flex;
   justify-content: center;
   width: 100%;
-  height: 50vh;
+  max-height: 50vh;
   align-items: center;
 `;

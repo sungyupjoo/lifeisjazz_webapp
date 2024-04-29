@@ -10,6 +10,7 @@ interface ButtonProps {
   href?: string;
   link?: boolean;
   onClick?: () => void;
+  margin?: number;
 }
 
 export const Button: React.FC<ButtonProps> = ({
@@ -20,10 +21,11 @@ export const Button: React.FC<ButtonProps> = ({
   href,
   link = false,
   onClick,
+  margin = 5,
 }) => {
   return (
     <>
-      <ButtonContainer backgroundColor={backgroundColor}>
+      <ButtonContainer backgroundColor={backgroundColor} margin={margin}>
         {logoUrl && <LogoImage src={logoUrl} />}
         {link ? (
           <Link
@@ -56,13 +58,13 @@ export const Button: React.FC<ButtonProps> = ({
   );
 };
 
-const ButtonContainer = styled.div<{ backgroundColor: string }>`
+const ButtonContainer = styled.div<{ backgroundColor: string; margin: number }>`
   background-color: ${(props) => props.backgroundColor};
   word-break: keep-all;
   text-align: center;
-  margin-top: 5px;
-  margin-right: 5px;
-  margin-left: 5px;
+  margin-top: ${(props) => props.margin + "px"};
+  margin-right: ${(props) => props.margin + "px"};
+  margin-left: ${(props) => props.margin + "px"};
   display: inline-block;
   cursor: pointer;
   padding: 8px 20px;
@@ -81,6 +83,9 @@ const ButtonContainer = styled.div<{ backgroundColor: string }>`
         ? colors.mainShade
         : colors.subShade};
   }
+  @media (max-width: 576px) {
+    padding: 4px 10px;
+  }
 `;
 
 const ButtonAnchor = styled.a<{ fontColor: string }>`
@@ -89,6 +94,9 @@ const ButtonAnchor = styled.a<{ fontColor: string }>`
   color: ${(props) => props.fontColor};
   & > * {
     vertical-align: middle;
+  }
+  @media (max-width: 576px) {
+    font-size: 0.9rem;
   }
 `;
 

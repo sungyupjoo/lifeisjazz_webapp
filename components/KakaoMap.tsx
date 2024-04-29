@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import styled from "@emotion/styled";
 
 declare global {
   interface Window {
@@ -32,17 +33,17 @@ export default function KakaoMap() {
     kakaoMapScript.addEventListener("load", onLoadKakaoAPI);
   }, []);
 
-  return (
-    <div
-      id="map"
-      style={{
-        marginTop: "2rem",
-        width: "50%",
-        height: "400px",
-        borderRadius: "2rem",
-        boxShadow: "rgba(0, 0, 0, 0.16) 0px 1px 4px",
-        flexShrink: 0,
-      }}
-    ></div>
-  );
+  return <StyledMap id="map"></StyledMap>;
 }
+
+const StyledMap = styled.div`
+  margin-top: 2rem;
+  width: 50%;
+  height: 400px;
+  border-radius: 2rem;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  flex-shrink: 0;
+  @media (max-width: 991px) {
+    width: 100%;
+  }
+`;

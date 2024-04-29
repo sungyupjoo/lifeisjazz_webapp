@@ -28,4 +28,9 @@ const TitleText = styled.h2`
 const SubTitle = styled.h4`
   color: ${colors.gray};
   font-size: 1.15rem;
+  word-break: keep-all;
+  @media (max-width: 576px) {
+    font-size: 1rem;
+    line-height: 1.6rem;
+  }
 `;

@@ -213,9 +213,10 @@ const JamDayPortal = () => {
             backgroundColor={colors.sub}
             text="곡 신청 +"
             onClick={openAddSongModal}
+            margin={0}
           />
         </AddSongButtonContainer>
-        {/* <p>간단히 보기 toggle slider</p> */}
+        <TotalSongNumber>{`총 ${requestedSongs.length}곡 신청 중`}</TotalSongNumber>
         <Song
           requestedSongs={requestedSongs}
           updateParticipant={updateHandler}
@@ -249,6 +250,11 @@ export default JamDayPortal;
 const LogoContainer = styled.div`
   position: absolute;
   margin-left: 1rem;
+  @media (max-width: 991px) {
+    margin-left: 0;
+    left: 50%;
+    transform: translateX(-50%);
+  }
   width: 100px;
   height: 100px;
 `;
@@ -265,6 +271,11 @@ const LogoImage = styled.img`
     height: 100px;
     margin-left: 10px;
   }
+  @media (max-width: 576px) {
+    width: 75px;
+    height: 75px;
+    margin-left: 10px;
+  }
 `;
 
 const AddSongButtonContainer = styled.div`
@@ -273,4 +284,14 @@ const AddSongButtonContainer = styled.div`
   justify-content: space-between;
   padding: 1rem 2rem;
   cursor: pointer;
+  @media (max-width: 576px) {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+`;
+
+const TotalSongNumber = styled.p`
+  margin-left: 2rem;
+  margin-bottom: 2rem;
+  font-family: semibold;
 `;
