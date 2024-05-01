@@ -14,10 +14,9 @@ import {
 import { globalStyles } from "../styles/globalStyles";
 import { useEffect, useRef, useState } from "react";
 import { ModalProvider } from "styled-react-modal";
-import type { AppProps } from "next/app";
 import { SessionProvider } from "next-auth/react";
 
-function App({ pageProps }: AppProps) {
+function App() {
   const homeRef = useRef<HTMLDivElement>(null);
   const aboutRef = useRef<HTMLDivElement>(null);
   const managerRef = useRef<HTMLDivElement>(null);

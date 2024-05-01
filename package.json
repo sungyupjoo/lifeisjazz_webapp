@@ -5,9 +5,9 @@
   "type": "module",
   "scripts": {
     "dev": "next dev",
-    "build": "npm run vercel-deploy",
+    "build": "next build",
     "start": "next start",
-    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0"
+    "lint": "next lint"
   },
   "dependencies": {
     "@babel/runtime": "^7.24.1",

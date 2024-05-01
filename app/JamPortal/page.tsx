@@ -39,10 +39,6 @@ const JamDayPortal = () => {
     setAddSongModalVisible((prev) => !prev);
   };
 
-  const openCancelSongModal = () => {
-    setCancelSongModalVisible((prev) => !prev);
-  };
-
   useEffect(() => {
     setIsLoading(true);
     const formattedSelectedDate = `${selectedDate.getFullYear()} ${

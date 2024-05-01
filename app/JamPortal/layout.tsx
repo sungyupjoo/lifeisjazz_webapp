@@ -1,5 +1,3 @@
-import { SessionProvider } from "next-auth/react";
-import Script from "next/script";
 import { ReactNode } from "react";
 
 export const metadata = {
