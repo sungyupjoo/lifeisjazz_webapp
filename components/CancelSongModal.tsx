@@ -1,5 +1,5 @@
 import React from "react";
-import { StyledModal } from "../../components/common";
+import { StyledModal } from "./common";
 
 interface CancelSongModalProps {
   isVisible: boolean;

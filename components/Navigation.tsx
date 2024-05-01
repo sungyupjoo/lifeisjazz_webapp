@@ -6,7 +6,6 @@ import colors from "../styles/theme";
 import { RefObject, useState } from "react";
 import Login from "./Login/Login";
 import { Hamburger } from "./common/Icons/Hamburger";
-import { useSession } from "next-auth/react";
 
 interface NavigationProps {
   homeRef: RefObject<HTMLDivElement>;
