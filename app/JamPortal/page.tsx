@@ -10,7 +10,7 @@ import WeeklyCalendar from "../../components/Calendar/WeeklyCalendar";
 import Song from "../../components/Song";
 import colors from "../../styles/theme";
 import { ModalProvider } from "styled-react-modal";
-import AddSongModal from "./AddSongModal";
+import AddSongModal from "../../components/AddSongModal";
 import {
   InstrumentType,
   KeyType,
@@ -20,8 +20,9 @@ import {
 import { exampleMembers } from "../../components/contents/exampleMembers";
 import { doc, onSnapshot, setDoc } from "firebase/firestore";
 import { db } from "../../firebase/config";
-import CancelSongModal from "./CancelSongModal";
+import CancelSongModal from "../../components/CancelSongModal";
 import { logo_black } from "../../public/assets";
+import { SessionProvider } from "next-auth/react";
 
 const JamDayPortal = () => {
   const [selectedDate, setSelectedDate] = useState(startOfDay(new Date()));
@@ -190,7 +191,7 @@ const JamDayPortal = () => {
   }
 
   return (
-    <>
+    <SessionProvider>
       <Global styles={globalStyles} />
       <ModalProvider>
         <LogoContainer>
@@ -237,7 +238,7 @@ const JamDayPortal = () => {
           />
         )}
       </ModalProvider>
-    </>
+    </SessionProvider>
   );
 };
 

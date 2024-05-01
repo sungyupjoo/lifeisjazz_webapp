@@ -1,11 +1,11 @@
 import styled from "@emotion/styled";
 import React from "react";
-import CheckboxInput from "../../components/common/CheckboxInput";
-import { StyledModal } from "../../components/common";
-import CustomInput from "../../components/common/Input";
+import CheckboxInput from "./common/CheckboxInput";
+import { StyledModal } from "./common";
+import CustomInput from "./common/Input";
 import Select from "react-select";
-import { keyOptions, rhythmOptions } from "../../components/common/types";
-import colors from "../../styles/theme";
+import { keyOptions, rhythmOptions } from "./common/types";
+import colors from "../styles/theme";
 
 interface AddSongModalProps {
   isVisible: boolean;

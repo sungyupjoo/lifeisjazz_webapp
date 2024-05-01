@@ -26,8 +26,13 @@ import {
 import { formatDate } from "../utils/formatDate";
 import { ScheduleProps, exampleSchedule } from "./contents/exampleSchedule";
 import moment, { MomentInput } from "moment";
+import { useSession } from "next-auth/react";
+import LoginModal from "./common/LoginModal";
 
 const Schedule = () => {
+  // 유저 로그인 확인
+  const { data: session, status } = useSession();
+
   // 달력의 날짜
   const today = new Date();
   const [date, setDate] = useState<Value | null>(null);
@@ -51,6 +56,12 @@ const Schedule = () => {
   };
   const registerHandler = () => {};
 
+  // 로그인 모달
+  const [isLoginModalVisible, setIsLoginModalVisible] = useState(false);
+  const showLoginModal = () => {
+    setIsLoginModalVisible(true);
+  };
+
   return (
     <Container innerPadding backgroundGray>
       <Title titleText="일정" subTitle="모임 일정 및 잼데이 신청" />
@@ -66,7 +77,15 @@ const Schedule = () => {
                   <AddButton onClick={addEventHandler}>+</AddButton>
                 </TitleAndButtonContainer>
                 <ButtonContainer>
-                  <Button backgroundColor={colors.sub} text="잼데이" link />
+                  {status === "authenticated" ? (
+                    <Button backgroundColor={colors.sub} text="잼데이" link />
+                  ) : (
+                    <Button
+                      backgroundColor={colors.sub}
+                      text="잼데이"
+                      onClick={showLoginModal}
+                    />
+                  )}
                 </ButtonContainer>
               </ItemTitleContainer>
 
@@ -250,6 +269,14 @@ const Schedule = () => {
           <InputBox placeHolder="상세 내용" height={"8rem"} />
         </StyledModal>
       )}
+      {isLoginModalVisible && (
+        <LoginModal
+          isModalVisible={isLoginModalVisible}
+          closeModal={() => {
+            setIsLoginModalVisible(false);
+          }}
+        />
+      )}
     </Container>
   );
 };
@@ -419,12 +446,4 @@ const DetailContainer = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 8px;
-`;
-
-const PhotoContainer = styled.div`
-  width: 128px;
-  height: 128px;
-  border: 1px solid ${colors.gray};
-  border-radius: 8px;
-  margin-right: 0.8rem;
 `;

@@ -260,6 +260,8 @@ const DateText = styled.h3`
   }
   @media (max-width: 576px) {
     padding: 0.5rem;
+    width: 40px;
+    height: 40px;
   }
 `;
 

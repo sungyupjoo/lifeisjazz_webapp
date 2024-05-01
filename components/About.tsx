@@ -32,6 +32,9 @@ const ContentsContainer = styled.div`
   justify-contents: space-between;
   gap: 2rem;
   @media (max-width: 991px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  @media (max-width: 576px) {
     display: flex;
     flex-direction: column;
   }
@@ -49,10 +52,6 @@ const ContentsWrapper = styled.div<{ index: number }>`
   }
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
   flex-grow: 0;
-  @media (max-width: 991px) {
-    display: grid;
-    grid-template-columns: 1fr 3fr;
-  }
   transition: transform 0.3s ease-in-out;
   &:hover {
     scale: 1.1;
@@ -83,8 +82,6 @@ const Image = styled.img`
   flex-grow: 0;
   @media (max-width: 991px) {
     margin-bottom: 0;
-    border-bottom-left-radius: 8px;
-    border-top-right-radius: 0;
   }
   @media (max-width: 576px) {
     border-top-right-radius: 8px;
