@@ -83,7 +83,7 @@ const Song: React.FC<SongFCProps> = ({
             </TotalParticipantContainer>
           </SongWrapper>
           <Details>
-            <Detail>신청자 커멘트</Detail>
+            <Detail>신청자 코멘트</Detail>
             <p>{song.details}</p>
           </Details>
         </SongContainer>
