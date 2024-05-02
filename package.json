@@ -8,8 +8,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "vercel-deploy": "next build && next export",
-    "postinstall": "prisma generate"
+    "vercel-deploy": "next build && next export"
   },
   "dependencies": {
     "@babel/runtime": "^7.24.1",
