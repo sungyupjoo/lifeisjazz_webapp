@@ -36,7 +36,7 @@ export const Button: React.FC<ButtonProps> = ({
               fontFamily: "regular",
             }}
           >
-            {text}
+            <a>{text}</a>
           </Link>
         ) : (
           <ButtonAnchor
@@ -84,7 +84,7 @@ const ButtonContainer = styled.div<{ backgroundColor: string; margin: number }>`
         : colors.subShade};
   }
   @media (max-width: 576px) {
-    padding: 4px 10px;
+    padding: 8px 10px;
   }
 `;
 

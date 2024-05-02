@@ -11,6 +11,7 @@ const handler = NextAuth({
       clientSecret: "Y9D0eiA7J13mHwBCh8Y9NtCeoq5QbjbJ",
     }),
   ],
+  secret: "i2edoUdWuVgN0vWXiiU2SGe0znSNHo7tHG9aKJ78QB4=",
 });
 
 export { handler as GET, handler as POST };
