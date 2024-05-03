@@ -3,15 +3,12 @@ import KakaoProvider from "next-auth/providers/kakao";
 
 const handler = NextAuth({
   providers: [
-    // TODO: meta.env에서 import가 되게
     KakaoProvider({
-      // clientId: import.meta.env.VITE_REDIRECT_URI,
-      clientId: "043c7a5cbbacb67d0ce5de6b65e1e062",
-      // clientSecret: import.meta.env.VITE_CLIENT_SECRET_KEY,
-      clientSecret: "Y9D0eiA7J13mHwBCh8Y9NtCeoq5QbjbJ",
+      clientId: process.env.REST_API_KEY,
+      clientSecret: process.env.CLIENT_SECRET_KEY,
     }),
   ],
-  secret: "i2edoUdWuVgN0vWXiiU2SGe0znSNHo7tHG9aKJ78QB4=",
+  secret: process.env.NEXTAUTH_SECRET,
 });
 
 export { handler as GET, handler as POST };
