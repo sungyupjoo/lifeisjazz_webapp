@@ -36,7 +36,7 @@ export const Button: React.FC<ButtonProps> = ({
               fontFamily: "regular",
             }}
           >
-            <a>{text}</a>
+            {text}
           </Link>
         ) : (
           <ButtonAnchor
